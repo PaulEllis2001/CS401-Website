@@ -1,4 +1,5 @@
-<?php
+<?php include("includes/header.php");?>
 
-echo "testing indeed";
-?>
+
+
+<?php include("includes/footer.php"); ?>
