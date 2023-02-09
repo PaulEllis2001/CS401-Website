@@ -1,1 +1,4 @@
-Hello World!
+<?php
+
+echo "testing indeed";
+?>
