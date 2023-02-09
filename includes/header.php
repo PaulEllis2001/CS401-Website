@@ -20,16 +20,16 @@
                             <a class="nav-link" href="index.php">Home</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="leaderboard.php">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="curentValues.php">Curent Values</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="account.php">Account Overview</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="login.php">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="createAccount.php">Create Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.php">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="test.php">Test</a>
                         </li>
                     </ul>
                 </div>
