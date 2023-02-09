@@ -23,7 +23,7 @@
                             <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="curentValues.php">Curent Values</a>
+                            <a class="nav-link" href="currentValues.php">Current Values</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="account.php">Account Overview</a>
