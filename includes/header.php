@@ -11,6 +11,10 @@
             <div class="container">
                 <div class="navbar">
                 <h1 class="heading"><a class="title-nav" href="index.php">FraudCoin</a></h1>
+                <form id="search_form" method="POST" action="search_handler.php">
+                    <input type="text" id="search" name="search" placeholder="Search">
+                    <input type="submit" value="Search">
+                </form>
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link" href="index.php">Home</a>
