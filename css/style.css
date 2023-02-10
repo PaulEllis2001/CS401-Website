@@ -17,7 +17,9 @@ p{
 }
 
 .heading{
-    padding: 5px;
+    padding: 10px;
+    display:inline;
+    color:#000;
 }
 
 .boring-link{
@@ -32,9 +34,10 @@ p{
 .navbar{
     background-color: #333;
     color: #fff;
+    padding-top:5px;
 }
 .navbar-nav{
-    padding:0;
+    padding: 5px;
     list-style: none;
 }
 
@@ -75,5 +78,6 @@ p{
 
 .search_form{
     display:inline;
-    text-align: right;
+    float:inline-end;
+    padding: 5px;
 }
