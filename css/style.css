@@ -115,3 +115,11 @@ p{
     display: flex;
     justify-content: space-evenly;
 }
+
+.left_box{
+    justify-content: center;
+}
+
+.right_box{
+    justify-content: center;
+}

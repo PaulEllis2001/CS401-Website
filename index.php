@@ -6,8 +6,12 @@
     <div class="flex-row-box">
         <div id="leaderboardSummary" class="info_box">
             <div id="leaderboardSummaryHeaders">
-                <h2 class="boxHeading">Top Gain</h2>
-                <h2 class="boxHeading">Top Loss</h2>
+                <div class="left_box">
+                    <h2 class="boxHeading">Top Gain</h2>
+                </div>
+                <div class="right_box">
+                    <h2 class="boxHeading">Top Loss</h2>
+                </div>
             </div>
         </div>
         <div id="coinSummary" class="info_box">
