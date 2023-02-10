@@ -81,3 +81,37 @@ p{
     float:inline-end;
     padding: 5px;
 }
+
+.flex-row-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.info_box{
+    background-color: #c0c0c0;
+    margin: 10px;
+    min-width: 100px;
+    min-height: 100px;
+    display:flex;
+}
+
+#leaderboardSummary{
+    min-width: 45%;
+}
+
+#coinSummary{
+    min-width: 45%;
+}
+
+.boxHeading{
+    margin: 10px;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+#leaderboardSummaryHeaders{
+    display: flex;
+    justify-content: space-evenly;
+}
