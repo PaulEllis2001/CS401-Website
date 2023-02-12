@@ -31,11 +31,53 @@
                 </div>
                 <div class="right_box">
                     <h2 class="boxHeading">Top Loss</h2>
+                    <table>
+                        <thead>
+                            <th>
+                                Column 1
+                            </th>
+                            <th>
+                                Column 2
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr> 
+                                <td>Hello</td>
+                                <td>World</td>
+                            </tr>
+                            <tr>
+                                <td>This is</td>
+                                <td>Paul</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
         <div id="coinSummary" class="info_box">
-
+            <h2 class="boxHeading">Top Coins Last 24 Hours</h2>
+            <div class="box">
+                <table>
+                    <thead>
+                        <th>
+                            Column 1
+                        </th>
+                        <th>
+                            Column 2
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hello</td>
+                            <td>World</td>
+                        </tr>
+                        <tr>
+                            <td>This is</td>
+                            <td>Paul</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div id="accountSummary" class="info_box">

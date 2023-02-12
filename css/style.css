@@ -109,6 +109,7 @@ p{
     margin: 10px;
     display:flex;
     justify-content: space-evenly;
+    padding: 5px;
 }
 
 #leaderboardSummaryHeaders{
@@ -118,8 +119,16 @@ p{
 
 .left_box{
     justify-content: center;
+    margin: 10px;
 }
 
 .right_box{
     justify-content: center;
+    margin: 10px;
+}
+
+.box{
+    display:flex;
+    justify-content: center;
+    margin:10px;
 }
