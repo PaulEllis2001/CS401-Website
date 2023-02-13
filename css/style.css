@@ -61,11 +61,6 @@ p{
     color: rgb(47, 26, 122);
 }
 
-.intro-paragraph{
-    background-color: #333;
-    color: #fff;
-}
-
 .title-nav{
     text-decoration: none;
     color: #fff;
@@ -82,53 +77,99 @@ p{
     padding: 5px;
 }
 
-.flex-row-box{
+.main_box{
+    background-color: #000;
+    display:flex;
+    flex-direction: column;
+    justify-content: left;
+    min-width: 100px;
+    min-height: 100px;
+    margin:10px;
+}
+
+.main_box_row{
+    background-color: #c0c0c0;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    min-width: 50px;
+    min-height: 50px;
+    margin: 10px 10px 10px 10px;
+}
+
+.row_item{
+    background-color: #fff;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
-}
-
-.info_box{
-    background-color: #c0c0c0;
-    margin: 10px;
-    min-width: 100px;
-    min-height: 100px;
-    display:flex;
-}
-
-#leaderboardSummary{
     min-width: 45%;
-}
-
-#coinSummary{
-    min-width: 45%;
-}
-
-.boxHeading{
+    min-height: 40px;
     margin: 10px;
-    display:flex;
+}
+
+.column_item{
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
+    flex-wrap: wrap;
+    min-width: 45%;
+    min-height: 40px;
+    margin: 10px;
+    padding-left: 15px;
+}
+
+.lbs_item{
+    justify-content: center;
+    margin: 5px 10px;
+}
+
+#account_summary{
+    min-width: 92%;
+}
+
+table{
+    border-collapse: collapse;
+    border: 3px solid #000;
+    table-layout: fixed;
+}
+
+th{
+    background-color: #95ac9f;
+    font-size: 1.2em;
+    padding: 5px;
+    border: 1px solid #000;
+}
+
+tbody{
+    text-align: center;
+}
+tr{
     padding: 5px;
 }
 
-#leaderboardSummaryHeaders{
-    display: flex;
-    justify-content: space-evenly;
+td{
+    padding:3px 5px;
+    border: 1px solid #000;
+
 }
 
-.left_box{
-    justify-content: center;
-    margin: 10px;
+tr:nth-child(even){
+    background-color: #c0c0c0;
+}
+tr:nth-child(odd){
+    background-color: #95b8cc;
 }
 
-.right_box{
-    justify-content: center;
-    margin: 10px;
+#as_coins{
+    padding-right: 10px;
 }
 
-.box{
-    display:flex;
-    justify-content: center;
-    margin:10px;
+.positive{
+    color: rgb(20, 122, 20);
+}
+
+.negative{
+    color: #f00;
 }
