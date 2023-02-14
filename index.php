@@ -156,7 +156,9 @@
             </div>
         </div>
         <div class="row_item" id="coin_summary">
+            <div class="column_item">
             <h2>Coin Summary</h2>
+            <div>
             <table>
                 <thead>
                     <th>Coin</th>
@@ -186,7 +188,9 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
             <p>Click to see more</p>
+            </div>
         </div>
     </div>
     <div class="main_box_row">
@@ -208,7 +212,8 @@
                     </div>
                 </div>
                 <hr>
-                <div id="as_coins">
+                <div class="row_item" id="as_coins">
+                    <div class="center_content">
                     <h3>Coins</h3>
                     <table>
                         <thead>
@@ -239,6 +244,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

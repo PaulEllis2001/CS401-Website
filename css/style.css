@@ -164,6 +164,7 @@ tr:nth-child(odd){
 
 #as_coins{
     padding-right: 10px;
+    justify-content: center;
 }
 
 .positive{
@@ -172,4 +173,7 @@ tr:nth-child(odd){
 
 .negative{
     color: #f00;
+}
+.center_content{
+    align-items: center;
 }
