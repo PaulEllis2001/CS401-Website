@@ -97,6 +97,13 @@ p{
     margin: 10px 10px 10px 10px;
 }
 
+.row{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .row_item{
     background-color: #fff;
     display: flex;
@@ -127,6 +134,7 @@ p{
 
 #account_summary{
     min-width: 92%;
+    padding-bottom: 20px;
 }
 
 table{
@@ -175,5 +183,39 @@ tr:nth-child(odd){
     color: #f00;
 }
 .center_content{
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.bordered{
+    margin: 3px;
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.left_item{
+    padding-left: 10px;
+}
+
+.form_box{
+    max-width: 50%;
+    background-color: #c0c0c0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.login_box{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+}
+
+.form_item{
+    margin-bottom: 5px;
+}
+
+.login_button{
+    width:fit-content;
 }

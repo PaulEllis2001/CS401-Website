@@ -1,94 +1,10 @@
 <?php include("includes/header.php");?>
 
-<h1>Welcome!</h1>
-
-<!--div>
-    <div class="flex-row-box">
-        <div id="leaderboardSummary" class="info_box">
-            <div id="leaderboardSummaryHeaders">
-                <div class="left_box">
-                    <h2 class="boxHeading">Top Gain</h2>
-                    <table>
-                        <thead>
-                            <th>
-                                Column 1
-                            </th>
-                            <th>
-                                Column 2
-                            </th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Hello</td>
-                                <td>World</td>
-                            </tr>
-                            <tr>
-                                <td>This is</td>
-                                <td>Paul</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="right_box">
-                    <h2 class="boxHeading">Top Loss</h2>
-                    <table>
-                        <thead>
-                            <th>
-                                Column 1
-                            </th>
-                            <th>
-                                Column 2
-                            </th>
-                        </thead>
-                        <tbody>
-                            <tr> 
-                                <td>Hello</td>
-                                <td>World</td>
-                            </tr>
-                            <tr>
-                                <td>This is</td>
-                                <td>Paul</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div id="coinSummary" class="info_box">
-            <h2 class="boxHeading">Top Coins Last 24 Hours</h2>
-            <div class="box">
-                <table>
-                    <thead>
-                        <th>
-                            Column 1
-                        </th>
-                        <th>
-                            Column 2
-                        </th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Hello</td>
-                            <td>World</td>
-                        </tr>
-                        <tr>
-                            <td>This is</td>
-                            <td>Paul</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="accountSummary" class="info_box">
-
-    </div>
-
-</div-->
+<h1>Welcome! Please <a href="login.php">Login Or Create an Account</a></h1>
 <div class="main_box">
     <div class="main_box_row">
         <div class="row_item" id="leaderboard_summary">
-            <div class="lbs_item" id="leaderboard_summary_gain">
+            <div class="lbs_item center_content" id="leaderboard_summary_gain">
                 <h2>Top Gains</h2>
                 <table>
                     <thead>
@@ -119,9 +35,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>Click to see more</p>
+                <p><a href="leaderboard.php">Click to see more</a></p>
             </div>
-            <div class="lbs_item" id="leaderboard_summary_loss">
+            <div class="lbs_item center_content" id="leaderboard_summary_loss">
                 <h2>Top Losses</h2>
                 <table>
                     <thead>
@@ -152,11 +68,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <p>Click to see more</p>
+                <p><a href="leaderboard.php">Click to see more</a></p>
             </div>
         </div>
         <div class="row_item" id="coin_summary">
-            <div class="column_item">
+            <div class="column_item center_content">
             <h2>Coin Summary</h2>
             <div>
             <table>
@@ -189,26 +105,31 @@
                 </tbody>
             </table>
             </div>
-            <p>Click to see more</p>
+            <p><a href="currentValues.php">Click to see more</a></p>
             </div>
         </div>
     </div>
     <div class="main_box_row">
         <div class="column_item" id="account_summary">
-            <h2>Account Summary</h2>
+            <div class="row">
+                <h2>Account Summary</h2>
+                <p><a href="account.php">Click to view full account details</a></p>
+            </div>
             <div class="row_item">
                 <div class="row_item" id="as_portfolio">
-                    <div>
+                    <div class="center_content left_item">
                         <h3>CASH</h3>
-                        <h3>$ 83,000</h3>
+                        <h3 class="bordered">$ 83,000</h3>
                     </div>
-                    <div>
+                    <hr>
+                    <div class="center_content">
                         <h3>COINS</h3>
-                        <h3>$ 2,139.01</h3>
+                        <h3 class="bordered">$ 2,139.01</h3>
                     </div>
-                    <div>
+                    <hr>
+                    <div class="center_content">
                         <h3>CHANGE</h3>
-                        <h3 class="positive">+ 3.01%</h3>
+                        <h3 class="positive bordered">+ 3.01%</h3>
                     </div>
                 </div>
                 <hr>
