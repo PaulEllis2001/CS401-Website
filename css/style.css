@@ -219,3 +219,10 @@ tr:nth-child(odd){
 .login_button{
     width:fit-content;
 }
+
+.column_box{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:flex-start;
+}
