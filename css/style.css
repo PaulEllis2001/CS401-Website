@@ -226,3 +226,8 @@ tr:nth-child(odd){
     justify-content:center;
     align-items:flex-start;
 }
+
+#coin_graph{
+    width: 500px;
+    height: 400px;
+}

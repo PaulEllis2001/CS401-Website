@@ -7,12 +7,12 @@
             <div>
                 <!-- PORTFOLIO OVERVIEW -->
                 <h2>Portfolio Overview</h2>
-                <p>Current Cash: $ 32,100</p>
-                <p>Current Invested: $ 2,950.10</p>
-                <p>24 Hour Change:</p><p> + .03%</p>
-                <p>Top Value Coin: Coiny Coin</p>
-                <p>Bottom Value Coin: AlphaBravo Coin</p>
-                <p>Current Rank: #321</p>
+                <p>Current Cash: $ 32,100 </br>
+                Current Invested: $ 2,950.10 </br>
+                24 Hour Change: + .03% </br>
+                Top Value Coin: Coiny Coin </br>
+                Bottom Value Coin: AlphaBravo Coin </br>
+                Current Rank: #321</p>
             </div>
             <div>
                 <!-- COINS IN WALLET  -->
@@ -25,32 +25,32 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>CoinyCoin</td>
+                            <td><a href="coin.php">CoinyCoin</a></td>
                             <td>121</td>
                             <td>$ 1,234.56</td>
                         </tr>
                         <tr>
-                            <td>CoinyCoin</td>
+                            <td><a href="coin.php">CoinyCoin</a></td>
                             <td>121</td>
                             <td>$ 1,234.56</td>
                         </tr>
                         <tr>
-                            <td>CoinyCoin</td>
+                            <td><a href="coin.php">CoinyCoin</a></td>
                             <td>121</td>
                             <td>$ 1,234.56</td>
                         </tr>
                         <tr>
-                            <td>CoinyCoin</td>
+                            <td><a href="coin.php">CoinyCoin</a></td>
                             <td>121</td>
                             <td>$ 1,234.56</td>
                         </tr>
                         <tr>
-                            <td>CoinyCoin</td>
+                            <td><a href="coin.php">CoinyCoin</a></td>
                             <td>121</td>
                             <td>$ 1,234.56</td>
                         </tr>
                         <tr>
-                            <td>CoinyCoin</td>
+                            <td><a href="coin.php">CoinyCoin</a></td>
                             <td>121</td>
                             <td>$ 1,234.56</td>
                         </tr>
