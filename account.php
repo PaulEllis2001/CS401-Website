@@ -1,10 +1,11 @@
 <?php include("includes/header.php");?>
 
 <div>
-    <h1>Welcome Back USER1!</h1>
+   
     <div class="column_box">
+         <h1>Welcome Back USER1!</h1>
         <div class="row">
-            <div>
+            <div class="center_content account_row_item">
                 <!-- PORTFOLIO OVERVIEW -->
                 <h2>Portfolio Overview</h2>
                 <p>
@@ -16,7 +17,7 @@
                     <span>Current Rank: #321</span>
                 </p>
             </div>
-            <div>
+            <div class="center_content account_row_item">
                 <!-- COINS IN WALLET  -->
                 <h2>Coins In Wallet</h2>
                 <table>

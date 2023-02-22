@@ -104,6 +104,7 @@ p{
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .row_item{
@@ -238,4 +239,25 @@ tr:nth-child(odd){
     padding-left: 50px;
     padding-right: 50px;
     margin: 0px 10px;
+}
+.account_row_item{
+    display: flex;
+    padding: 0px 15px;
+    margin: auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.search{
+    padding-bottom: 10px;
+}
+
+.nav_tab{
+    padding-bottom: 10px;
+}
+
+.nav_tab button{
+    padding: 5px;
+    border: 1px solid #333;
+    float:left;
 }

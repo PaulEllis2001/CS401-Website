@@ -5,8 +5,8 @@
     <div class="column_box">
         <div class="search">
             <form method="GET" action="handlers/values_search_handler.php">
-                <input type="text">
-                <input type="submit">
+                <input type="text" id="search_querry">
+                <input type="submit" value="Search">
             </form>
         </div>
         <div class="center_content">

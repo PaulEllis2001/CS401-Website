@@ -3,7 +3,7 @@
 <div class="center_content">
     <h1>Leaderboard</h1>
     <div class="column_box">
-        <div class="">
+        <div class="nav_tab">
             <button onclick="window.location.href='?tab=user_gains';">User Gains</button>
             <button onclick="window.location.href='?tab=user_losses';">User Losses</button>
             <button onclick="window.location.href='?tab=coin_gains';">Coin Gains</button>
