@@ -1,6 +1,8 @@
 .container{
     padding: auto;
     font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer{
@@ -230,4 +232,10 @@ tr:nth-child(odd){
 #coin_graph{
     width: 500px;
     height: 400px;
+}
+
+.owned_coin{
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: 0px 10px;
 }

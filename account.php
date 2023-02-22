@@ -7,12 +7,14 @@
             <div>
                 <!-- PORTFOLIO OVERVIEW -->
                 <h2>Portfolio Overview</h2>
-                <p>Current Cash: $ 32,100 </br>
-                Current Invested: $ 2,950.10 </br>
-                24 Hour Change: + .03% </br>
-                Top Value Coin: Coiny Coin </br>
-                Bottom Value Coin: AlphaBravo Coin </br>
-                Current Rank: #321</p>
+                <p>
+                    <span>Current Cash: $ 32,100 </span></br>
+                    <span>Current Invested: $ 2,950.10 </span></br>
+                    <span>24 Hour Change: <span class="positive">+ .03%</span> </span></br>
+                    <span>Top Value Coin: Coiny Coin</span> </br>
+                    <span>Bottom Value Coin: AlphaBravo Coin </span></br>
+                    <span>Current Rank: #321</span>
+                </p>
             </div>
             <div>
                 <!-- COINS IN WALLET  -->
@@ -74,7 +76,7 @@
                         <td>AlphaBravo Coin</td>
                         <td>200</td>
                         <td>$30.10</td>
-                        <td>-$19.90</td>
+                        <td class="negative">-$19.90</td>
                         <td>Sell</td>
                     </tr>
                     <tr>
@@ -88,7 +90,7 @@
                         <td>AlphaBravo Coin</td>
                         <td>200</td>
                         <td>$30.10</td>
-                        <td>-$19.90</td>
+                        <td class="negative">-$19.90</td>
                         <td>Sell</td>
                     </tr>
                     <tr>
@@ -102,7 +104,7 @@
                         <td>AlphaBravo Coin</td>
                         <td>200</td>
                         <td>$30.10</td>
-                        <td>-$19.90</td>
+                        <td class="negative">-$19.90</td>
                         <td>Sell</td>
                     </tr>
                     <tr>
@@ -116,7 +118,7 @@
                         <td>AlphaBravo Coin</td>
                         <td>200</td>
                         <td>$30.10</td>
-                        <td>-$19.90</td>
+                        <td class="negative">-$19.90</td>
                         <td>Sell</td>
                     </tr>
                     <tr>
