@@ -2,7 +2,7 @@
 
 <div>
     <h1>Welcome Back USER1!</h1>
-    <div class="column">
+    <div class="column_box">
         <div class="row">
             <div>
                 <!-- PORTFOLIO OVERVIEW -->
