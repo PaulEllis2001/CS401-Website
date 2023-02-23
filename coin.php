@@ -1,6 +1,6 @@
 <?php include("includes/header.php");?>
 
-<div class="column_box">
+<div>
     <div class="row">
         <div class="row_item bordered">
             <div class="column_item center_content">
