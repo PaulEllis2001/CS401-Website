@@ -4,12 +4,11 @@
 
         private $db = "FraudCoinDB";
         private $user = "root";
-        private $password = $_ENV["DB_PASSWORD"];
         private $host = "localhost";
 
         public function getConnection(){
             return new PDO("mysql:host={$this->host};dbname={$this->db}",
-            $this->user, $this->password);
+            $this->user, getenv("DB_PASSWORD"));
         }
 
         public function getCoinSummary(){
