@@ -47,13 +47,19 @@
             //
         }
 
-        public function getLoginInformation(){
+        public function getLoginInformation($user_name){
             //Need to take in username
         }
 
         public function createNewUser($user_name, $user_password, $user_email, $user_birthday){
+            
             //insert into users (username, password, email, birthday, cash, rank)
             $connection = $this->getConnection();
+            $currentUsers = $connection->query("SELECT user_name FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            if(in_array($user_name, $currentUsers)){
+                //Return an error and display on the website
+            }
+
             $ranks = $connection->query("SELECT rank FROM users DESC LIMIT 1")->fetchAll(PDO::FETCH_ASSOC);
             $nextRank = $ranks[0]+1;
             $createUser = "INSERT INTO users (user_name, user_password, user_email, user_birthday, user_cash, user_rank) 
@@ -67,9 +73,19 @@
             $q->execute();
         }
 
-        public function updateExistingUser(){
+        public function updateExistingUser($user_name, $new_info){
             //Check if user actually exists
             //run update query
+            $connection = $this->getConnection();
+            $q = $connection->prepare("SELECT * FROM users WHERE user_name = :incoming_user");
+            $q->bindParam(":incoming_user", $user_name);
+            if($q->execute()){
+                $user = $q->fetchAll(PDO::FETCH_ASSOC);
+                return $user;
+
+                $stmt = "UPDATE users SET :column1 = :value1 WHERE user_id = :USER_ID";
+            }
+            return null;//Should probably return some sort of error as statement failed
         }
 
         public function createPurchaseOrder(){
