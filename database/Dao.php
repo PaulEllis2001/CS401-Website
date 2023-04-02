@@ -75,6 +75,7 @@
 
         public function updateExistingUser($user_name, $new_info){
             //Check if user actually exists
+            //TODO ^
             //run update query
             $connection = $this->getConnection();
             $q = $connection->prepare("SELECT * FROM users WHERE user_name = :incoming_user");
@@ -88,8 +89,42 @@
             return null;//Should probably return some sort of error as statement failed
         }
 
-        public function createPurchaseOrder(){
+        public function createPurchaseOrder($user_id, $coin_id, $coin_amt = 0.0, $dollar_amt = 0.0){
+            $conn = $this->getConnection();
+            $insertHistory_string = "INSERT INTO transaction_history 
+            (user_id, coin_id, transaction_type, transaction_amount, transaction_value, transaction_change) 
+            VALUES (:user_id, :coin_id, 'buy', :transaction_amount, :transaction_value, transaction_change)";
 
+            $changeAmt = 0.0;
+            $userWalletID = 0;
+
+            $lastTransaction_string = "SELECT * FROM transaction_history 
+            WHERE user_id = :user_id AND coin_id = :coin_id 
+            ORDER BY transaction_time DESC LIMIT 1";
+
+            $updateUserWallet_string = "UPDATE user_coins 
+            SET purchase_time = NOW(), purchase_value = :coin_value, 
+            purchase_amount = :coin_amt WHERE purchase_id = :wallet_id";
+
+            $userWallet_string = "SELECT * FROM user_coins WHERE user_id = :user_id AND coin_id = :coin_id";
+            $uWQ = $conn->prepare($userWallet_string);
+            $uWQ->bindParam(":user_id", $user_id);
+            $uWQ->bindParam(":coin_id", $coin_id);
+            if($uWQ->execute()){
+                $userWalletID = $uWQ->fetchAll(PDO::FETCH_ASSOC)["purchase_id"];
+            }
+
+            $lTQ = $conn->prepare($lastTransaction_string);
+            $lTQ->bindParam(":user_id", $user_id);
+            $lTQ->bindParam(":coin_id", $coin_id);
+            if($lTQ->execute()){
+                $lTQ_Array = $lTQ->fetchAll(PDO::FETCH_ASSOC);
+                if($coin_amt > 0){
+                    $changeAmt = ($coin_amt - $lTQ_Array["transaction_amount"]) / $lTQ["transaction_amount"];
+                } else {
+                    $changeAmt = ($dollar_amt - $lTQ_Array["transaction_value"]) / $lTQ_Array["transaction_value"];
+                }
+            }
         }
 
         public function createSaleOrder(){
