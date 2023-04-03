@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once '../database/Dao.php';
 
 function validate_birthday($birthday){
