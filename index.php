@@ -1,5 +1,4 @@
 <?php include("includes/header.php");?>
-
 <h1>Welcome! Please <a href="login.php">Login Or Create an Account</a></h1>
 <div class="main_box">
     <div class="main_box_row">
