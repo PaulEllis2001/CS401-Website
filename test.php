@@ -3,7 +3,7 @@ require_once './database/Dao.php';
 
 $dao = new Dao();
 
-$result = $dao->getLoginInformation("pdellis");
+$result = $dao->debugUsers();
 
 print_r($result)
 ?>

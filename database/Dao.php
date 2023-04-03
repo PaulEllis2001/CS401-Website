@@ -6,6 +6,11 @@
         private $user = "root";
         private $host = "localhost";
 
+        public function debugUsers(){
+            $conn = $this->getConnection();
+            return $conn->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function getConnection(){
             return new PDO("mysql:host={$this->host};dbname={$this->db}",
             $this->user, getenv("DB_PASSWORD"));
