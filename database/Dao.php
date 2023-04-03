@@ -11,6 +11,7 @@
             $this->user, getenv("DB_PASSWORD"));
         }
 
+        //Look At Again
         public function getCoinSummary(){
             $connection = $this->getConnection();
             return $connection->query("SELECT * 
@@ -20,6 +21,7 @@
             GROUP BY coin_id")->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        //Done
         public function getCurrentCoinValues(){
             $connection = $this->getConnection();
             return $connection->query(
@@ -27,30 +29,59 @@
                 )->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        //Done
         public function getUserLeaderboard(){
-
+            $conn = $this->getConnection();
+            return $conn->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        //Done
         public function getCoinLeaderboard(){
-
+            $conn = $this->getConnection();
+            return $conn->query("SELECT * FROM coin")->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function getHomeSummary(){
-
+        //Done
+        public function getUserInfo($user_id){
+            $conn = $this->getConnection();
+            $q = $conn->prepare("SELECT * FROM users WHERE user_id = :user_id");
+            $q->bindParam(":user_id", $user_id);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function getUserHistory(){
-
+        //Done
+        //Returns assoc array of all user's history to be processed outside of the Dao
+        public function getUserHistory($user_id){
+            $conn = $this->getConnection();
+            $q = $conn->prepare("SELECT * FROM transaction_history WHERE user_id = :user_id");
+            $q->bindParam(":user_id", $user_id);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function getUserWallet(){
+        //Done
+        //Returns assoc array for all coins in a user's wallet to be processed outside of the Dao
+        public function getUserWallet($user_id){
             //
+            $conn = $this->getConnection();
+            $prepString = "SELECT * FROM user_coins WHERE user_id = :user_id";
+            $q = $conn->prepare($prepString);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        //Done
         public function getLoginInformation($user_name){
-            //Need to take in username
+            //Need to take in username, Returns the user's row to the program for processing to be done there
+            $conn = $this->getConnection();
+            $q = $conn->prepare("SELECT * FROM users WHERE user_name = :user_name");
+            $q->bindParam(":user_name", $user_name);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        //Done
         public function createNewUser($user_name, $user_password, $user_email, $user_birthday){
             
             //insert into users (username, password, email, birthday, cash, rank)
@@ -58,6 +89,7 @@
             $currentUsers = $connection->query("SELECT user_name FROM users")->fetchAll(PDO::FETCH_ASSOC);
             if(in_array($user_name, $currentUsers)){
                 //Return an error and display on the website
+                return "Failed to create a new user, username already in use";
             }
 
             $ranks = $connection->query("SELECT rank FROM users DESC LIMIT 1")->fetchAll(PDO::FETCH_ASSOC);
@@ -71,25 +103,33 @@
             $q->bindParam(":user_birthday", $user_birthday);
             $q->bindParam(":user_rank",$nextRank);
             $q->execute();
+            return "Success! User Created";
         }
 
-        public function updateExistingUser($user_name, $new_info){
-            //Check if user actually exists
-            //TODO ^
-            //run update query
-            $connection = $this->getConnection();
-            $q = $connection->prepare("SELECT * FROM users WHERE user_name = :incoming_user");
-            $q->bindParam(":incoming_user", $user_name);
-            if($q->execute()){
-                $user = $q->fetchAll(PDO::FETCH_ASSOC);
-                return $user;
+        //Done
+        public function updateExistingUser($user_id, $new_info){
+            //This function will go through each item in new info and update
+            //The given user with the information
+            //Returns true if all succed returns the exception if sometings fails
 
+            $connection = $this->getConnection();
+            foreach($new_info as $key => $value){
                 $stmt = "UPDATE users SET :column1 = :value1 WHERE user_id = :USER_ID";
+                $uQ = $connection->prepare($stmt);
+                $uQ->bindParam(":column1", $key);
+                $uQ->bindParam(":value1", $value);
+                $uQ->bindParam(":USER_ID", $user_id);
+                try{
+                    $uQ->execute();
+                } catch (Exception $e){
+                    return $e;
+                }
             }
-            return null;//Should probably return some sort of error as statement failed
+            return true;//Should probably return some sort of error as statement failed
         }
 
         public function createPurchaseOrder($user_id, $coin_id, $coin_amt = 0.0, $dollar_amt = 0.0){
+            //TODO finish this
             $conn = $this->getConnection();
             $insertHistory_string = "INSERT INTO transaction_history 
             (user_id, coin_id, transaction_type, transaction_amount, transaction_value, transaction_change) 
@@ -128,7 +168,7 @@
         }
 
         public function createSaleOrder(){
-
+            //TODO this
         }
     }
 
