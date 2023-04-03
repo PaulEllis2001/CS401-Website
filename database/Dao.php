@@ -21,8 +21,9 @@
             $connection = $this->getConnection();
             return $connection->query("SELECT * 
             from coin_history 
-            WHERE DAY(change_time) = DAY(NOW())
-            GROUP BY coin_id")->fetchAll(PDO::FETCH_ASSOC);
+            WHERE YEAR(change_time) = YEAR(NOW())
+            GROUP BY coin_id
+            ORDER BY change_time DESC")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         //Done
