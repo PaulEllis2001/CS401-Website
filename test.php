@@ -1,5 +1,5 @@
 <?php
-require_once '/database/Dao.php';
+require_once './database/Dao.php';
 
 $dao = new Dao();
 
