@@ -1,5 +1,5 @@
 <?php
-
+session_start();
     class Dao{
 
         private $db = "FraudCoinDB";
@@ -93,7 +93,7 @@
             $currentUsers = $connection->query("SELECT user_name FROM users")->fetchAll(PDO::FETCH_ASSOC);
             if(in_array($user_name, $currentUsers)){
                 //Return an error and display on the website
-                return "Failed to create a new user, username already in use";
+                return "username in use";
             }
 
             $nextRank = rand();
@@ -107,7 +107,7 @@
             $q->bindParam(":user_birthday", $user_birthday);
             $q->bindParam(":user_rank",$nextRank);
             $q->execute();
-            return "Success! User Created";
+            return "success";
         }
 
         //Done

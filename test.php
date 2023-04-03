@@ -7,6 +7,8 @@ $result = $dao->debugTable();
 
 echo "<pre>" . print_r($result, 1) . "</pre>";
 
+echo hash("sha256", "Paul Ellis");
+
 //$coins = $dao->debugTable("coin");
 //echo "<pre>" . print_r($coins, 1) . "</pre>";
 
