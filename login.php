@@ -1,11 +1,5 @@
 <?php include("includes/header.php");?>
 
-<?php
-    if(isset($_COOKIE["response"])){
-        print_r($_COOKIE["response"]);
-    }
-?>
-
 <div class="row_item">
     <div id="create_account_box" class="form_box center_content">
         <h2>Create Account</h2>

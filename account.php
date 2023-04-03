@@ -1,5 +1,10 @@
 <?php include("includes/header.php");?>
 
+<?php
+    if(isset($_COOKIE["response"])){
+        print_r($_COOKIE["response"]);
+    }
+?>
 <div>
    
     <div class="column_box">
