@@ -97,8 +97,8 @@
                 return "Failed to create a new user, username already in use";
             }
 
-            $ranks = $connection->query("SELECT rank FROM users DESC LIMIT 1")->fetchAll(PDO::FETCH_ASSOC);
-            $nextRank = $ranks[0]+1;
+            $nextRank = rand();
+
             $createUser = "INSERT INTO users (user_name, user_password, user_email, user_birthday, user_cash, user_rank) 
             VALUES (:user_name, :user_password, :user_email, :user_birthday, 100000, :user_rank)";
             $q = $connection->prepare($createUser);
