@@ -9,7 +9,7 @@ if(isset($_POST["create_username"])){
     $_POST["create_email"], 
     $_POST["create_birthday"]);
 
-    $_COOKIE["response"] = $response;
+    setcookie("response", $response);
 }
 
 if(isset($_POST["login_username"])){
