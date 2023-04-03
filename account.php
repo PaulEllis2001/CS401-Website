@@ -1,13 +1,14 @@
-<?php include("includes/header.php");?>
-
-<?php
-    if(isset($_COOKIE["response"])){
-        print_r($_COOKIE["response"]);
-    }
+<?php include("includes/header.php");
+session_start();
 ?>
+
 <div>
    
     <div class="column_box">
+
+<?php
+    echo "<pre>" . print_r($_SESSION["response"]) . "</pre>";
+?>
          <h1>Welcome Back USER1!</h1>
         <div class="row">
             <div class="center_content account_row_item">
