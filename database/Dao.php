@@ -22,7 +22,6 @@
             return $connection->query("SELECT * 
             from coin_history 
             WHERE DAY(change_time) = DAY(NOW())
-            ORDER BY change_time DESC
             GROUP BY coin_id")->fetchAll(PDO::FETCH_ASSOC);
         }
 
