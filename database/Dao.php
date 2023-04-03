@@ -36,13 +36,13 @@
         //Done
         public function getUserLeaderboard(){
             $conn = $this->getConnection();
-            return $conn->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            return $conn->query("SELECT * FROM users ORDER BY user_rank")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         //Done
         public function getCoinLeaderboard(){
             $conn = $this->getConnection();
-            return $conn->query("SELECT * FROM coin")->fetchAll(PDO::FETCH_ASSOC);
+            return $conn->query("SELECT * FROM coin ORDER BY coin_value")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         //Done
@@ -58,7 +58,7 @@
         //Returns assoc array of all user's history to be processed outside of the Dao
         public function getUserHistory($user_id){
             $conn = $this->getConnection();
-            $q = $conn->prepare("SELECT * FROM transaction_history WHERE user_id = :user_id");
+            $q = $conn->prepare("SELECT * FROM transaction_history WHERE user_id = :user_id ORDER BY transaction_date DESC");
             $q->bindParam(":user_id", $user_id);
             $q->execute();
             return $q->fetchAll(PDO::FETCH_ASSOC);
