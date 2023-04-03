@@ -8,10 +8,7 @@
 
         public function debugTable($tableName = "users"){
             $conn = $this->getConnection();
-            $q = $conn->prepare("SELECT * FROM :tableName");
-            $q->bindParam(":tableName", $tableName);
-            $q->execute();
-            return $q->fetchAll(PDO::FETCH_ASSOC);
+            return $conn->query("SELECT * FROM $tableName")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function getConnection(){
