@@ -6,9 +6,12 @@
         private $user = "root";
         private $host = "localhost";
 
-        public function debugUsers(){
+        public function debugTable($tableName = "users"){
             $conn = $this->getConnection();
-            return $conn->query("SELECT * FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            $q = $conn->prepare("SELECT * FROM :tableName");
+            $q->bindParam(":tableName", $tableName);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function getConnection(){
