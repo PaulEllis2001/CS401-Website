@@ -1,5 +1,6 @@
-<?php include("includes/header.php");?>
-
+<?php include("includes/header.php");
+session_start();
+?>
 <div class="row_item">
     <div id="create_account_box" class="form_box center_content">
         <h2>Create Account</h2>
