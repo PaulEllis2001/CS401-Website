@@ -3,9 +3,12 @@ require_once './database/Dao.php';
 
 $dao = new Dao();
 
-$result = $dao->debugUsers();
+$result = $dao->debugTable();
 
-print_r($result, 1)
+echo "<pre>" . print_r($result, 1) . "</pre>";
+
+$coins = $dao->debugTable("coin");
+echo "<pre>" . print_r($coins, 1) . "</pre>";
 ?>
 
 
