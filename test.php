@@ -25,5 +25,12 @@ print_r($result)
 <?php 
     if(isset($_POST["create_birthday"])){
         echo $_POST["create_birthday"];
+
+        $result = $dao->createNewUser($_POST["create_username"], $_POST["create_password"],
+        $_POST["create_email"], $_POST["create_birthday"]);
+
+        echo $result;
     }
+
+
 ?>
