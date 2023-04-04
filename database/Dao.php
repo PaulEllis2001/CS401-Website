@@ -58,7 +58,7 @@ session_start();
         //Returns assoc array of all user's history to be processed outside of the Dao
         public function getUserHistory($user_id){
             $conn = $this->getConnection();
-            $q = $conn->prepare("SELECT * FROM transaction_history WHERE user_id = :user_id ORDER BY transaction_date DESC");
+            $q = $conn->prepare("SELECT * FROM transaction_history WHERE user_id = :user_id ORDER BY transaction_time DESC");
             $q->bindParam(":user_id", $user_id);
             $q->execute();
             return $q->fetchAll(PDO::FETCH_ASSOC);
@@ -71,6 +71,7 @@ session_start();
             $conn = $this->getConnection();
             $prepString = "SELECT * FROM user_coins WHERE user_id = :user_id";
             $q = $conn->prepare($prepString);
+            $q->bindParam(":user_id", $user_id);
             $q->execute();
             return $q->fetchAll(PDO::FETCH_ASSOC);
         }

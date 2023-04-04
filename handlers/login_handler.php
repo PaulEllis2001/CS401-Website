@@ -4,7 +4,7 @@ require_once '../database/Dao.php';
 
 function validate_birthday($birthday){
     $birthdate_time = new DateTime($birthday);
-    $today = new DateTime(date('yyyy-mm-dd'));
+    $today = new DateTime(date('y-m-d'));
     $age = $today->diff($birthdate_time);
     if($age->y < 16){
         return false;
@@ -13,7 +13,7 @@ function validate_birthday($birthday){
 }
 
 $dao = new Dao();
-
+echo print_r($_POST);
 if(isset($_POST["create_username"])){
 
     //Verify birthday - at least 13 yrs old

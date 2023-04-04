@@ -1,20 +1,23 @@
 <?php include("includes/header.php");
+
+require_once'database/Dao.php';
+if(!isset($_COOKIE['PHPSESSID'])){
 session_start();
+}
 if(!isset($_SESSION['user_id'])){
     header("Location: login.php", true, 302);
     die();
 }
+$dao = new Dao();
+$userInfo = $dao->getUserInfo($_SESSION['user_id'])[0];
+$userHistory = $dao->getUserHistory($_SESSION['user_id']);
+$userWallet = $dao->getUserWallet($_SESSION['user_id']);
+
 ?>
 
 <div>
-   
     <div class="column_box">
-
-<?php
-    echo "<pre>" . print_r($_SESSION["response"]) . "</pre>";
-    echo "<pre>" . print_r($_SESSION) . "</pre>";
-?>
-         <h1>Welcome Back USER1!</h1>
+    <h1>Welcome Back <?php echo $userInfo['user_name'];?>!</h1>
         <div class="row">
             <div class="center_content account_row_item">
                 <!-- PORTFOLIO OVERVIEW -->
