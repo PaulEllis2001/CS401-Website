@@ -4,14 +4,19 @@ require_once'Widgets.php';
 
 $dao = new Dao();
 $widget = new Widgets();
-
+$userInfo = null;
 $welcome = "Welcome";
 if(isset($_SESSION['user_id'])){
    $userInfo = $dao->getUserInfo($_SESSION['user_id'])[0];
    $welcome .= " back, " . $userInfo['user_name'] . "!";
 } else {
-    $welcome.="! Please <a href=\"login.php\"Login or Create an Account</a>";
+    $welcome.="! Please <a href=\"login.php\">Login or Create an Account</a>";
 }
+
+$gainColumnHeadings = ["Rank", "User", "Portfolio Value", "Best Coin"];
+$LossColumnHeadings = ["Rank", "User", "Portfolio Value", "Best Coin"];
+
+
 
 ?>
    <h1><?php echo $welcome; ?></h1>
@@ -20,68 +25,20 @@ if(isset($_SESSION['user_id'])){
         <div class="row_item" id="leaderboard_summary">
             <div class="lbs_item center_content" id="leaderboard_summary_gain">
                 <h2>Top Gains</h2>
-                <table>
-                    <thead>
-                        <th>User</th>
-                        <th>% Gain</th>
-                        <th>Portfolio Value</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>User1</td>
-                            <td class="positive">+ 50.34 %</td>
-                            <td>$ 300,231.56</td>
-                        </tr>
-                        <tr>
-                            <td>User2</td>
-                            <td class="positive">+ 49.67 %</td>
-                            <td>$ 270,145.61</td>
-                        </tr>
-                        <tr>
-                            <td>User3</td>
-                            <td class="positive">+ 47.42 %</td>
-                            <td>$ 280,123.70</td>
-                        </tr>
-                        <tr>
-                            <td>User4</td>
-                            <td class="positive">+ 45.45 %</td>
-                            <td>$ 200,690.69</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <?php
+                    $userGainLeaderboard = $dao->getUserLeaderboard();
+                    $userLossesLeaderboard = $dao->getUserLeaderboard(true);
+                    $userGainLeaderboard = array_slice($userGainLeaderboard, 0, 5, true);
+                    $userLossesLeaderboard = array_slice($userLossesLeaderboard, 0, 5, true);
+                    echo $widget->renderTable($userGainLeaderboard, $gainColumnHeadings);
+                ?>
                 <p><a href="leaderboard.php">Click to see more</a></p>
             </div>
             <div class="lbs_item center_content" id="leaderboard_summary_loss">
                 <h2>Top Losses</h2>
-                <table>
-                    <thead>
-                        <th>User</th>
-                        <th>% Loss</th>
-                        <th>Portfolio Value</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>User1</td>
-                            <td class="negative">+ 50.34 %</td>
-                            <td>$ 300,231.56</td>
-                        </tr>
-                        <tr>
-                            <td>User2</td>
-                            <td class="negative">+ 49.67 %</td>
-                            <td>$ 270,145.61</td>
-                        </tr>
-                        <tr>
-                            <td>User3</td>
-                            <td class="negative">+ 47.42 %</td>
-                            <td>$ 280,123.70</td>
-                        </tr>
-                        <tr>
-                            <td>User4</td>
-                            <td class="negative">+ 45.45 %</td>
-                            <td>$ 200,690.69</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <?php 
+                    echo $widget->renderTable($userLossesLeaderboard, $LossColumnHeadings);
+                ?>
                 <p><a href="leaderboard.php">Click to see more</a></p>
             </div>
         </div>
@@ -89,35 +46,13 @@ if(isset($_SESSION['user_id'])){
             <div class="column_item center_content">
             <h2>Coin Summary</h2>
             <div>
-            <table>
-                <thead>
-                    <th>Coin</th>
-                    <th>% Gain</th>
-                    <th>USD/Coin</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>SillyGooseCoin</td>
-                        <td class="positive">+ 50.34 %</td>
-                        <td>$ 1.23</td>
-                    </tr>
-                    <tr>
-                        <td>KillMeNowCoin</td>
-                        <td class="positive">+ 49.67 %</td>
-                        <td>$ 1.11</td>
-                    </tr>
-                    <tr>
-                        <td>RedHeringCoin</td>
-                        <td class="positive">+ 47.42 %</td>
-                        <td>$ 0.69</td>
-                    </tr>
-                    <tr>
-                        <td>AdHocCoin</td>
-                        <td class="positive">+ 45.45 %</td>
-                        <td>$ 2.03</td>
-                    </tr>
-                </tbody>
-            </table>
+            <?php
+
+                $coinSummary = array_slice($dao->getCurrentCoinValues(), 0, 5, true);
+                    $coinHeadings = ["Coin Name","USD/Coin","Number in Circulation"];
+                echo $widget->renderTable($coinSummary, $coinHeadings);
+
+            ?>
             </div>
             <p><a href="currentValues.php">Click to see more</a></p>
             </div>
@@ -131,59 +66,38 @@ if(isset($_SESSION['user_id'])){
             </div>
             <div class="row_item">
                 <div class="row_item" id="as_portfolio">
-                    <div class="center_content left_item">
-                        <h3>CASH</h3>
-                        <h3 class="bordered">$ 83,000</h3>
-                    </div>
-                    <hr>
-                    <div class="center_content">
-                        <h3>COINS</h3>
-                        <h3 class="bordered">$ 2,139.01</h3>
-                    </div>
-                    <hr>
-                    <div class="center_content">
-                        <h3>CHANGE</h3>
-                        <h3 class="positive bordered">+ 3.01%</h3>
-                    </div>
-                </div>
-                <hr>
-                <div class="row_item" id="as_coins">
-                    <div class="center_content">
-                    <h3>Coins</h3>
-                    <table>
-                        <thead>
-                            <th>Coin</th>
-                            <th>USD Value</th>
-                            <th>% Change</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>SillyGooseCoin</td>
-                                <td>$ 321.00</td>
-                                <td class="positive">+ 13%</td>
-                            </tr>
-                            <tr>
-                                <td>KillMeNowCoin</td>
-                                <td>$ 41.03</td>
-                                <td class="negative">- 2.31%</td>
-                            </tr>
-                            <tr>
-                                <td>RedHeringCoin</td>
-                                <td>$34.23</td>
-                                <td class="positive">+ 3.4%</td>
-                            </tr>
-                            <tr>
-                                <td>AdHocCoin</td>
-                                <td>$ 23.45</td>
-                                <td class="negative">- 0.69%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
+<?php 
+                    if(!isset($_SESSION['user_id'])){
+                       echo "<h2> Please <a href=\"login.php\">Login</a> to see a Summary </h2></div>";
+                    } else {
+                      echo accountSummary($userInfo, $dao, $widget); 
+                    }
+
+
+?>
             </div>
         </div>
     </div>
 </div>
+<?php
 
+function accountSummary($userInfo, $dao, $widget){
+   $columnNames= ["Coin Name","Coin Value","Total Value"];
+    $html = "";
+    $html .= "<div class=\"center_content left_item\"><h3>CASH</h3><h3 class=\"bordered\">$ " . $userInfo['user_cash'] . "</h3></div><hr>";
+    $html .= "<div class=\"center_content\"><h3>COINS</h3><h3 class=\"bordered\">$ " . getCoinsValue($dao) . "</h3></div><hr>";
+    $html .= "<div class=\"center_content\"><h3>TOTAL</h3><h3 class=\"bordered\">$ " . getCoinsValue($dao)+$userInfo['user_cash'] . "</h3></div><hr></div>";
+    $html .= "<div class=\"row_item\" id=\"as_coins\"> <div class=\"center_content\"><h3>Coins</h3>" . $widget->renderTable($dao->getUserWallet($_SESSION['user_id']), $columnNames) . "</div></div>";
+
+    return $html;
+}
+function getCoinsValue($dao){
+    $coins = $dao->getUserWallet($_SESSION['user_id']);
+    $sum = 0;
+    foreach($coins as $row){
+       $sum += $row['SUM(u.purchase_value)'];
+    }
+    return $sum;
+}
+?>
 <?php include("includes/footer.php"); ?>
