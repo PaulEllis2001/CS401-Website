@@ -34,15 +34,21 @@ session_start();
         }
 
         //Done
-        public function getUserLeaderboard(){
-            $conn = $this->getConnection();
-            return $conn->query("SELECT * FROM users ORDER BY user_rank")->fetchAll(PDO::FETCH_ASSOC);
+        public function getUserLeaderboard($invert = false){
+           $conn = $this->getConnection();
+           if($invert){
+              return $conn->query("SELECT u.user_rank, u.user_name, u.user_cash + SUM(uc.purchase_value), c.coin_name FROM users u JOIN user_coins uc ON u.user_id = uc.user_id JOIN coin c ON c.coin_id = uc.coin_id WHERE u.user_rank IS NOT NULL GROUP BY uc.user_id ORDER BY u.user_rank DESC")->fetchAll(PDO::FETCH_ASSOC);
+           }
+              return $conn->query("SELECT u.user_rank, u.user_name, u.user_cash + SUM(uc.purchase_value), c.coin_name FROM users u JOIN user_coins uc ON u.user_id = uc.user_id JOIN coin c ON c.coin_id = uc.coin_id WHERE u.user_rank IS NOT NULL GROUP BY uc.user_id ORDER BY u.user_rank ASC")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         //Done
-        public function getCoinLeaderboard(){
+        public function getCoinLeaderboard($invert = false){
             $conn = $this->getConnection();
-            return $conn->query("SELECT * FROM coin ORDER BY coin_value")->fetchAll(PDO::FETCH_ASSOC);
+            if($invert){
+               return $conn->query("SELECT coin_name, coin_value, coin_num_circulating FROM coin ORDER BY coin_value ASC")->fetchAll(PDO::FETCH_ASSOC);
+            }
+            return $conn->query("SELECT coin_name, coin_value, coin_num_circulating FROM coin ORDER BY coin_value DESC")->fetchAll(PDO::FETCH_ASSOC);
         }
 
         //Done
@@ -58,7 +64,7 @@ session_start();
         //Returns assoc array of all user's history to be processed outside of the Dao
         public function getUserHistory($user_id){
             $conn = $this->getConnection();
-            $q = $conn->prepare("SELECT * FROM transaction_history WHERE user_id = :user_id ORDER BY transaction_time DESC");
+            $q = $conn->prepare("SELECT c.coin_name, h.transaction_amount, h.transaction_value, h.transaction_change, h.transaction_type FROM transaction_history h JOIN coin c ON h.coin_id = c.coin_id WHERE user_id = :user_id ORDER BY h.transaction_time DESC");
             $q->bindParam(":user_id", $user_id);
             $q->execute();
             return $q->fetchAll(PDO::FETCH_ASSOC);
@@ -69,7 +75,7 @@ session_start();
         public function getUserWallet($user_id){
             //
             $conn = $this->getConnection();
-            $prepString = "SELECT * FROM user_coins WHERE user_id = :user_id";
+            $prepString = "SELECT c.coin_name, SUM(u.purchase_amount), SUM(u.purchase_value) FROM user_coins u JOIN coin c ON u.coin_id = c.coin_id WHERE user_id = :user_id GROUP BY c.coin_name ORDER BY SUM(u.purchase_value) DESC";
             $q = $conn->prepare($prepString);
             $q->bindParam(":user_id", $user_id);
             $q->execute();

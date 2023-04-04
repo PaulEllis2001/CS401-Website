@@ -1,4 +1,13 @@
-<?php include("includes/header.php");?>
+<?php include("includes/header.php");
+require_once'database/Dao.php';
+require_once'Widgets.php';
+
+$dao = new Dao();
+$widget = new Widgets();
+
+
+
+?>
 
 <div class="center_content">
     <h1>Current Values</h1>
