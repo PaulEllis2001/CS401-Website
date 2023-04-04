@@ -27,11 +27,11 @@ if(isset($_POST["create_username"])){
         $_SESSION["failure"]["password"] = "password";
     }
 
-    $email_regex = file_get_contents("../files/email_regex");
-
-    if(preg_match($email_regex, $_POST['create_email']) != 1){
+    $email_regex = file_get_contents("files/email_regex");
+    $regex_result = preg_match($email_regex, $_POST['create_email']);
+    if(preg_match($email_regex, $_POST['create_email']) === false ){
             $_SESSION['message']["email"] = "invalid email address";
-            $_SESSION['failure']["email"] = "email";
+            $_SESSION['failure']["email"] = "email" . $regex_result;
     }
 
     if(!validate_birthday($_POST['create_birthday'])){

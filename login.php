@@ -36,6 +36,7 @@ function printErrorMessages($messages){
             <?php
             if(isset($_SESSION['message'])){
             	echo printErrorMessages($_SESSION['message']);
+                echo "<pre>" .print_r($_SESSION) . "</pre>";
             }
             ?>
         </div>
