@@ -1,5 +1,20 @@
-<?php include("includes/header.php");?>
-<h1>Welcome! Please <a href="login.php">Login Or Create an Account</a></h1>
+<?php include("includes/header.php");
+require_once'database/Dao.php';
+require_once'Widgets.php';
+
+$dao = new Dao();
+$widget = new Widgets();
+
+$welcome = "Welcome";
+if(isset($_SESSION['user_id'])){
+   $userInfo = $dao->getUserInfo($_SESSION['user_id'])[0];
+   $welcome .= " back, " . $userInfo['user_name'] . "!";
+} else {
+    $welcome.="! Please <a href=\"login.php\"Login or Create an Account</a>";
+}
+
+?>
+   <h1><?php echo $welcome; ?></h1>
 <div class="main_box">
     <div class="main_box_row">
         <div class="row_item" id="leaderboard_summary">
