@@ -12,6 +12,7 @@ if(!isset($_SESSION['user_id'])){
 
 <?php
     echo "<pre>" . print_r($_SESSION["response"]) . "</pre>";
+    echo "<pre>" . print_r($_SESSION) . "</pre>";
 ?>
          <h1>Welcome Back USER1!</h1>
         <div class="row">
