@@ -69,13 +69,20 @@ if(isset($_POST["create_username"])){
 if(isset($_POST["login_username"])){
     $response = $dao->getLoginInformation($_POST["login_username"]);
     //VERIFY LOGIN INFORMATION
-    if($_POST["login_password"] == $response[0]["user_password"]){
-        $_SESSION['user_id']= $response[0]['user_id'];
+    if(isset($response[0])){
+        if($_POST["login_password"] == $response[0]["user_password"]){
+            $_SESSION['user_id']= $response[0]['user_id'];
+        } else {
+            $_SESSION['prev_info'] = json_encode($_POST);
+            $_SESSION['response'] = json_encode($response);
+            $_SESSION['failure']['login'] = 'password';
+            $_SESSION['message']['login'] = 'Failed to login, Username or Password Incorrect';
+        }
     } else {
         $_SESSION["prev_info"] = json_encode($_POST);
 	    $_SESSION['response'] = json_encode($response);
-        $_SESSION['failure']["login"] = "password";
-        $_SESSION['message']['login'] = "Failed to login, no matching password and username";
+        $_SESSION['failure']['login'] = 'username';
+        $_SESSION['message']['login'] = 'Failed to login, Username or Password Incorrect';
         header("Location: ../login.php", true, 302);
         die();
     }
