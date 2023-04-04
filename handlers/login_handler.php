@@ -23,32 +23,27 @@ if(isset($_POST["create_username"])){
     $verifyHash = hash("sha256", $_POST['create_validate_password']);
 
     if($passwordHash != $verifyHash){
-        $_SESSION["message"] = ["Passwords do not match"];
-        $_SESSION["failure"] = ["password"];
+        $_SESSION["message"]["password"] = "Passwords do not match";
+        $_SESSION["failure"]["password"] = "password";
     }
 
     $email_regex = file_get_contents("../files/email_regex");
 
     if(preg_match($email_regex, $_POST['create_email']) != 1){
-        if(isset($_SESSION['message'])){
-            array_push($_SESSION['message'], "invalid email address");
-            array_push($_SESSION['failure'], "email");
-        }
-        else {
-            $_SESSION['message'] = ["invalid email address"];
-            $_SESSION['failure'] = ["email"];
-        }
+            $_SESSION['message']["email"] = "invalid email address";
+            $_SESSION['failure']["email"] = "email";
     }
 
     if(!validate_birthday($_POST['create_birthday'])){
         if(isset($_SESSION['message'])){
-            array_push($_SESSION['message'], "Invalid Birthday");
-            array_push($_SESSION['failure'], "birthday");
+            $_SESSION['message']["birthday"] = "Invalid Birthday";
+            $_SESSION['failure']["birthday"] = "birthday";
         }
     }
 
     if(isset($_SESSION['failure'])){
         $_SESSION['prev_info'] = json_encode($_POST);
+        $_SESSION['create'] = true;
         header("Location: ../login.php", 302);
         die();
     }
@@ -62,7 +57,8 @@ if(isset($_POST["create_username"])){
     if($response == "username in use" ){
         $_SESSION['prev_info'] = json_encode($_POST);
         $_SESSION['message'] = "Failed to create user, Username taken";
-        $_SESSION['failure'] = "username";
+        $_SESSION['failure'] = ["username" => "username"];
+        $_SESSION['create'] = true;
         header("Location: ../login.php", true, 302);
         die();
     }
@@ -77,8 +73,9 @@ if(isset($_POST["login_username"])){
         $_SESSION['user_id']= $response[0]['user_id'];
     } else {
         $_SESSION["prev_info"] = json_encode($_POST);
-	$_SESSION['response'] = json_encode($response);
-        $_SESSION['message'] = "Failed to login, no matching password and username";
+	    $_SESSION['response'] = json_encode($response);
+        $_SESSION['failure']["login"] = "password";
+        $_SESSION['message']["login"] = "Failed to login, no matching password and username";
         header("Location: ../login.php", true, 302);
         die();
     }
