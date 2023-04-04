@@ -75,7 +75,7 @@ if(isset($_POST["login_username"])){
         $_SESSION["prev_info"] = json_encode($_POST);
 	    $_SESSION['response'] = json_encode($response);
         $_SESSION['failure']["login"] = "password";
-        $_SESSION['message']["login"] = "Failed to login, no matching password and username";
+        $_SESSION['message']['login'] = "Failed to login, no matching password and username";
         header("Location: ../login.php", true, 302);
         die();
     }
