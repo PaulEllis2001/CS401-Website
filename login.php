@@ -20,6 +20,15 @@ session_start();
     </div>
     <div class="center_content">
         <h1>OR</h1>
+<?php
+if(isset($_SESSION['response'])){
+	echo "<pre>" . $_SESSION['response'] . "</pre>";
+}
+if(isset($_SESSION['message'])){
+	echo "<pre>" . $_SESSION['message'] . "</php>";
+}
+?>
+
     </div>
     <div id="login_box" class="form_box center_content">
         <h2>Login</h2>

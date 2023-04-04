@@ -49,7 +49,7 @@ if(isset($_POST["create_username"])){
 
     if(isset($_SESSION['failure'])){
         $_SESSION['prev_info'] = json_encode($_POST);
-        header("Location: ../login.php", 406);
+        header("Location: ../login.php", 302);
         die();
     }
 
@@ -63,7 +63,7 @@ if(isset($_POST["create_username"])){
         $_SESSION['prev_info'] = json_encode($_POST);
         $_SESSION['message'] = "Failed to create user, Username taken";
         $_SESSION['failure'] = "username";
-        header("Location: ../login.php", true, 406);
+        header("Location: ../login.php", true, 302);
         die();
     }
 
@@ -77,8 +77,9 @@ if(isset($_POST["login_username"])){
         $_SESSION['user_id']= $response[0]['user_id'];
     } else {
         $_SESSION["prev_info"] = json_encode($_POST);
+	$_SESSION['response'] = json_encode($response);
         $_SESSION['message'] = "Failed to login, no matching password and username";
-        header("Location: ../login.php", true, 406);
+        header("Location: ../login.php", true, 302);
         die();
     }
 }
