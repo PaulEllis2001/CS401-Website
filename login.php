@@ -31,7 +31,7 @@ if(isset($_SESSION['message'])){
         <h2>Login</h2>
         <form class="form_box login_box" id="login_form" method="POST" action="handlers/login_handler.php">
             <label class="form_item" for="login_username">Username:</label>
-            <input class="form_item" value="<?php echo isset($_SESSION['failure']['login']) ? json_decode($_SESSION['prev_info'])['login_username'] : ""; ?>" type="text" id="login_username" name="login_username">
+            <input class="form_item" value="<?php echo !isset($_SESSION['user_id']) ? json_decode($_SESSION['prev_info'])['login_username'] : ""; ?>" type="text" id="login_username" name="login_username">
             <label class="form_item" for="login_password">Password:</label>
             <input class="form_item" type="password" id="login_password" name="login_password">
             <input class="form_item login_button" type="submit" value="Login">
