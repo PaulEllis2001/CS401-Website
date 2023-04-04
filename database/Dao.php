@@ -29,7 +29,7 @@ session_start();
         public function getCurrentCoinValues(){
             $connection = $this->getConnection();
             return $connection->query(
-                "SELECT * FROM coin"
+                "SELECT coin_name, coin_value, coin_num_circulating FROM coin ORDER BY coin_value DESC"
                 )->fetchAll(PDO::FETCH_ASSOC);
         }
 
