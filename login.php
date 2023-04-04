@@ -28,7 +28,7 @@ function oldUsername(){
         <h1>OR</h1>
 <?php
 if(isset($_SESSION['message'])){
-	echo "<pre>" . print_r($_SESSION['message']) . "</php>";
+	echo "<pre>" . print_r($_SESSION['message']) . "</pre>";
 }
 ?>
 
