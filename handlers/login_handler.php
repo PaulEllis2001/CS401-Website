@@ -13,7 +13,6 @@ function validate_birthday($birthday){
 }
 
 $dao = new Dao();
-echo print_r($_POST);
 if(isset($_POST["create_username"])){
 
     //Verify birthday - at least 13 yrs old
@@ -53,22 +52,17 @@ if(isset($_POST["create_username"])){
         $_POST["create_email"], 
         $_POST["create_birthday"]);
 
-    if($response == "username in use" ){
+    if(is_array($response)){
+        foreach($response as $emailUsernameFailure){
+            $_SESSION['message'][$emailUsernameFailure] = $emailUsernameFailure;
+            $_SESSION['failure']['in_use'] .= $emailUsernameFailure;
+        }
         $_SESSION['prev_info'] = json_encode($_POST);
-        $_SESSION['message'] = "Failed to create user, Username taken";
-        $_SESSION['failure'] = ["username" => "username"];
         $_SESSION['create'] = true;
         header("Location: ../login.php", true, 302);
         die();
     }
-    if($response == "email in use" ){
-        $_SESSION['prev_info'] = json_encode($_POST);
-        $_SESSION['message'] = "Failed to create user, email in use";
-        $_SESSION['failure'] = ["email_in_use" => "email_in_use"];
-        $_SESSION['create'] = true;
-        header("Location: ../login.php", true, 302);
-        die();
-    }
+
 
     $_SESSION["response"] = json_encode($response);
 }

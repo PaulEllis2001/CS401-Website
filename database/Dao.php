@@ -102,16 +102,19 @@ session_start();
             
             //insert into users (username, password, email, birthday, cash, rank)
             $connection = $this->getConnection();
-            $currentUsers = $connection->query("SELECT user_name FROM users")->fetchAll(PDO::FETCH_ASSOC);
-            if(in_array($user_name, $currentUsers)){
-                //Return an error and display on the website
-                return "username in use";
+            $currentUsers = $connection->query("SELECT user_name, user_email FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            $response = array();
+            foreach($currentUsers as $row){
+                if(strcmp($row['user_email'], $user_email) == 0){
+                   array_push($response, "email in use");
+                }
+                if(strcmp($row['user_name'], $user_name) == 0){
+                   array_push($response, 'username in use'); 
+                }
             }
-            $currentEmails = $connection->query("SELECT user_email FROM users")->fetchAll(PDO::FETCH_ASSOC);
-            if(in_array($user_email, $currentEmails)){
-                return "email in use";
+            if(isset($response[0])){
+                return $response;
             }
-
             $nextRank = rand();
 
             $createUser = "INSERT INTO users (user_name, user_password, user_email, user_birthday, user_cash, user_rank) 
