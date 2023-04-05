@@ -92,6 +92,11 @@ session_start();
             return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function getUserEmailForCheck(){
+            $conn = $this->getConnection();
+            return $conn->query("SELECT user_email FROM users")->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         //Done
         public function createNewUser($user_name, $user_password, $user_email, $user_birthday){
             
@@ -101,6 +106,10 @@ session_start();
             if(in_array($user_name, $currentUsers)){
                 //Return an error and display on the website
                 return "username in use";
+            }
+            $currentEmails = $connection->query("SELECT user_email FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            if(in_array($user_email, $currentEmails)){
+                return "email in use";
             }
 
             $nextRank = rand();

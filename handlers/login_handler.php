@@ -1,7 +1,7 @@
 <?php
 
 require_once '../database/Dao.php';
-
+$_SESSION = array();
 function validate_birthday($birthday){
     $birthdate_time = new DateTime($birthday);
     $today = new DateTime(date('y-m-d'));
@@ -26,12 +26,13 @@ if(isset($_POST["create_username"])){
         $_SESSION["message"]["password"] = "Passwords do not match";
         $_SESSION["failure"]["password"] = "password";
     }
-
-    $email_regex = file_get_contents("files/email_regex");
-    $regex_result = preg_match($email_regex, $_POST['create_email']);
-    if(preg_match($email_regex, $_POST['create_email']) === false ){
+    $email_regex = file_get_contents("../files/email_regex"); 
+    $_SESSION['email_regex'] = $email_regex;
+    $matches = array();
+    preg_match($email_regex, $_POST['create_email'], $matches);
+    if($matches == null){
             $_SESSION['message']["email"] = "invalid email address";
-            $_SESSION['failure']["email"] = "email" . $regex_result;
+            $_SESSION['failure']["email"] = "email" . json_encode($matches) . $email_regex;
     }
 
     if(!validate_birthday($_POST['create_birthday'])){
@@ -47,17 +48,23 @@ if(isset($_POST["create_username"])){
         header("Location: ../login.php", 302);
         die();
     }
-
-
     $response = $dao->createNewUser($_POST["create_username"], 
-    $_POST["create_password"], 
-    $_POST["create_email"], 
-    $_POST["create_birthday"]);
+        $_POST["create_password"], 
+        $_POST["create_email"], 
+        $_POST["create_birthday"]);
 
     if($response == "username in use" ){
         $_SESSION['prev_info'] = json_encode($_POST);
         $_SESSION['message'] = "Failed to create user, Username taken";
         $_SESSION['failure'] = ["username" => "username"];
+        $_SESSION['create'] = true;
+        header("Location: ../login.php", true, 302);
+        die();
+    }
+    if($response == "email in use" ){
+        $_SESSION['prev_info'] = json_encode($_POST);
+        $_SESSION['message'] = "Failed to create user, email in use";
+        $_SESSION['failure'] = ["email_in_use" => "email_in_use"];
         $_SESSION['create'] = true;
         header("Location: ../login.php", true, 302);
         die();

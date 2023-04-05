@@ -1,6 +1,8 @@
 <?php include("includes/header.php");
-
+require_once"database/Dao.php";
 session_start();
+
+$dao = new Dao();
 
 function printErrorMessages($messages){
     $finalString = "";
@@ -34,10 +36,30 @@ function printErrorMessages($messages){
         </div>
         <div>
             <?php
+// echo print_r(phpinfo());
+//                $matches = null;
+  //              $test = file_get_contents("files/email_regex"); 
+    //            preg_match($test, "xys@asdf.com", $matches);
+      //          echo $test;
+        //        echo print_r($matches);
+          //      if($matches == null){
+            //       echo 'test';
+              //  }
             if(isset($_SESSION['message'])){
             	echo printErrorMessages($_SESSION['message']);
                 echo "<pre>" .print_r($_SESSION) . "</pre>";
             }
+            if(isset($_SESSION['email_regex'])){
+                echo print_r($_SESSION['email_regex']);
+            }
+            $temp = $dao->getUserEmailForCheck();
+            foreach($temp as $row){
+                echo print_r ($row);
+                if(strcmp($row["user_email"], "asdf@asdf.com") == 0){
+                    echo "<br/>";
+                }
+            } 
+            //echo print_r($dao->getUserEmailForCheck());
             ?>
         </div>
     </div>
