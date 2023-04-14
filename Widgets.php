@@ -69,5 +69,44 @@ class Widgets {
 
     return $html;
     }
+    
 
+    public static function renderCoinTable($rows, $columnNames = null) {
+        if($columnNames == null){
+           $columnNames = array_keys($rows[0]);
+        }
+
+        $html = "<table><thead><tr>";
+
+        foreach($columnNames as $column){
+           $html .= "<th>{$column}</th>";
+        }
+        $html .= "<th>Buy or Sell</th></tr></thead><tbody>";
+
+        $coinName = "";
+        foreach($rows as $row){
+           $html .= "<tr>";
+           $first = true;
+           foreach($row as $data){
+                if($first){
+                   $html .= "<td><a href=\"coin.php?coin_name={$data}\">{$data}</a></td>";
+                   $coinName = $data;
+                   $first = false;
+                } else {
+                   if(is_double($data) || is_int($data)){
+                      $html .= "<td>" . number_format($data, is_double($data)? 2: 0) . "</td>";
+                   } else {
+                      $html .= "<td>" . htmlspecialchars($data) . "</td>";
+                   }
+                }
+
+           }
+
+           $html .= "<td><button id=\"buy{$coinName}\" class=\"buy\">Buy</button><button id=\"sell{$coinName}\" class=\"sell\">Sell</button></td></tr>";
+
+        }
+        $html .= "</tbody></table>";
+
+        return $html;
+    }
 }

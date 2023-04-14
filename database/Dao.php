@@ -25,6 +25,35 @@ session_start();
             ORDER BY coin_id, change_time DESC")->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function getCoinID($coinName){
+           $conn = $this->getConnection();
+           $q = $conn->prepare("SELECT coin_id FROM coin WHERE coin_name = :coinName");
+           $q->bindParam(":coinName", $coinName);
+           $q->execute();
+          return $q->fetchAll(PDO::FETCH_ASSOC); 
+        }
+
+        public function getCoinInfo($coinID){
+
+            $conn = $this->getConnection();
+
+            $q = $conn->prepare("SELECT * FROM coin WHERE coin_id = :coinID");
+            $q->bindParam(":coinID", $coinID);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+
+        public function getUserCoinSpecific($user_id, $coin_id){
+            $conn = $this->getConnection();
+            $q = $conn->prepare("SELECT SUM(purchase_amount), SUM(purchase_value) FROM user_coins WHERE user_id = :user_id AND coin_id = :coin_id ");
+            $q->bindParam(":user_id", $user_id);
+            $q->bindParam(":coin_id", $coin_id);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
+        
+        }
+
         //Done
         public function getCurrentCoinValues(){
             $connection = $this->getConnection();

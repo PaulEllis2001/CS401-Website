@@ -20,9 +20,7 @@ $columnNames = ["Coin Name", "Coin Value", "Number in Circulation"];
         </div>
         <div class="center_content">
             <?php
-                $extraHeading = array("Buy or Sell");
-                $extraData = array_fill(0, count($values), array("<button class=\"buy\">Buy</button><button class=\"sell\">Sell</button>"));
-                echo $widget->renderTableWithExtraColumns($values, $columnNames, $extraHeading, $extraData);
+                echo $widget->renderCoinTable($values, $columnNames);
             ?>
         </div>
     </div>

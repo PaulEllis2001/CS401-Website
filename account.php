@@ -38,7 +38,7 @@ $widget = new Widgets();
             <div class="center_content account_row_item">
                 <!-- COINS IN WALLET  -->
                 <h2>Coins In Wallet</h2>
-                <?php echo $widget->renderTable($userWallet, $walletColumnNames);?>
+                <?php echo $widget->renderCoinTable($userWallet, $walletColumnNames);?>
             </div>
         </div>
         <div class="center_content">

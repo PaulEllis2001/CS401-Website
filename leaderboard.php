@@ -47,10 +47,8 @@ if(isset($_GET['tab'])){
                 echo $widget->renderTable($leaderboard, $columnNames); 
             } else {
 
-               $buySell = array_fill(0, count($leaderboard), array("<button class=\"buy\">Buy</button><button class=\"sell\">Sell</button>"));
-               $heading = array("Buy or Sell");
 
-                echo $widget->renderTableWithExtraColumns($leaderboard, $columnNames, $heading, $buySell);
+                echo $widget->renderCoinTable($leaderboard, $columnNames);
             }
         ?>
         </div>
