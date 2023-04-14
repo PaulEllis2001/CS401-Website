@@ -132,6 +132,7 @@ session_start();
             //insert into users (username, password, email, birthday, cash, rank)
             $connection = $this->getConnection();
             $currentUsers = $connection->query("SELECT user_name, user_email FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            $rank = $this->getRank($connection)[0]['user_rank'];
             $response = array();
             foreach($currentUsers as $row){
                 if(strcmp($row['user_email'], $user_email) == 0){
@@ -144,7 +145,7 @@ session_start();
             if(isset($response[0])){
                 return $response;
             }
-            $nextRank = rand();
+            $nextRank = $rank + 1;
 
             $createUser = "INSERT INTO users (user_name, user_password, user_email, user_birthday, user_cash, user_rank) 
             VALUES (:user_name, :user_password, :user_email, :user_birthday, 100000, :user_rank)";
@@ -221,6 +222,15 @@ session_start();
 
         public function createSaleOrder(){
             //TODO this
+        }
+
+        public function testGetRank(){
+            return $this->getRank($this->getConnection());
+        }
+        public function getRank($conn){
+
+           $retVal = $conn->query("SELECT user_rank FROM users WHERE user_cash <= 100000 ORDER BY user_rank DESC")->fetchAll(PDO::FETCH_ASSOC);
+           return $retVal;
         }
     }
 

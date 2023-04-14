@@ -17,6 +17,7 @@ $userWallet = $dao->getUserWallet($_SESSION['user_id']);
 $walletColumnNames = ["Coin Name", "Number of Coins", "Value of Coins"];
 $widget = new Widgets();
 
+
 ?>
 
 <div>
@@ -30,8 +31,9 @@ $widget = new Widgets();
                 <span>Current Cash: $ <?php echo$userInfo['user_cash'];?> </span></br>
                     <span>Current Invested: $ 2,950.10 </span></br>
                     <span>24 Hour Change: <span class="positive">+ .03%</span> </span></br>
-                    <span>Top Value Coin: <?php echo $userWallet[0]['coin_name'];?></span> </br>
-                    <span>Bottom Value Coin: <?php echo $userWallet[array_key_last($userWallet)]['coin_name'];?>  </span></br>
+                    <span>Top Value Coin: <?php echo isset($userWallet[0])? isset($userWallet[0]['coin_name'])? $userWallet[0]['coin_name'] : 'No Coins in Wallet' : 'No Coins in Wallet';?></span> </br>
+                    <span>Bottom Value Coin: <?php 
+echo isset($userWallet[array_key_last($userWallet)]) ? $userWallet[array_key_last($userWallet)]['coin_name'] : 'No Coins in Wallet';?>  </span></br>
                     <span>Current Rank: #<?php echo $userInfo['user_rank'];?></span>
                 </p>
             </div>
