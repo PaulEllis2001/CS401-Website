@@ -14,13 +14,15 @@ $columnNames = ["Coin Name", "Coin Value", "Number in Circulation"];
     <div class="column_box">
         <div class="search">
             <form method="GET" action="handlers/values_search_handler.php">
-                <input type="text" id="search_querry">
+                <input type="text" id="query">
                 <input type="submit" value="Search">
             </form>
         </div>
         <div class="center_content">
             <?php
-                echo $widget->renderTable($values, $columnNames);
+                $extraHeading = array("Buy or Sell");
+                $extraData = array_fill(0, count($values), array("<button class=\"buy\">Buy</button><button class=\"sell\">Sell</button>"));
+                echo $widget->renderTableWithExtraColumns($values, $columnNames, $extraHeading, $extraData);
             ?>
         </div>
     </div>

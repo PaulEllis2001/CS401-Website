@@ -26,6 +26,7 @@ if(isset($_GET['tab'])){
         $columnNames = ["Coin Name","Coin Value","Number in Circulation"];
     }
 } else {
+   $_GET['tab'] = "user_gains";
      $leaderboard = $dao->getUserLeaderboard();
         $columnNames = ["User Rank","User Name","Portfolio Amount","Best Coin"];
 }
@@ -42,7 +43,15 @@ if(isset($_GET['tab'])){
         </div>
         <div class="center_content">
         <?php
-            echo $widget->renderTable($leaderboard, $columnNames); 
+            if($_GET["tab"] == 'user_gains' || $_GET["tab"] == "user_losses"){
+                echo $widget->renderTable($leaderboard, $columnNames); 
+            } else {
+
+               $buySell = array_fill(0, count($leaderboard), array("<button class=\"buy\">Buy</button><button class=\"sell\">Sell</button>"));
+               $heading = array("Buy or Sell");
+
+                echo $widget->renderTableWithExtraColumns($leaderboard, $columnNames, $heading, $buySell);
+            }
         ?>
         </div>
     </div>
