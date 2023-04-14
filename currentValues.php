@@ -13,8 +13,8 @@ $columnNames = ["Coin Name", "Coin Value", "Number in Circulation"];
     <h1>Current Values</h1>
     <div class="column_box">
         <div class="search">
-            <form method="GET" action="handlers/values_search_handler.php">
-                <input type="text" id="query">
+            <form method="POST" action="handlers/values_search_handler.php">
+                <input type="text" id="query" name="query">
                 <input type="submit" value="Search">
             </form>
         </div>

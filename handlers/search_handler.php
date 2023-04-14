@@ -1,9 +1,15 @@
 <?php
+require_once '../database/Dao.php';
+if(!isset($_COOKIES['PHPSESSID'])){
+    session_start();
+}
 
-if(isset($_GET['query'])){
+$dao= new Dao();
 
+if(isset($_POST['search'])){
+    $_SESSION['search_results'] = json_encode("NOT YET IMPLEMENTED");
 } else {
-    $_SESSION['search_results'] = json_encode("no search results");
+    $_SESSION['search_results'] = json_encode($_POST);
 }
 
 header("Location: ../searchResults.php", true, 302);

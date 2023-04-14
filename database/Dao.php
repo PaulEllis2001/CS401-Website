@@ -16,6 +16,10 @@ session_start();
             $this->user, getenv("DB_PASSWORD"));
         }
 
+        public function searchCoins(){
+            $conn = $this->getConnection();
+            return $conn->query("SELECT * FROM coin")->fetchAll(PDO::FETCH_ASSOC);
+        }
         //Look At Again
         public function getCoinSummary(){
             $connection = $this->getConnection();

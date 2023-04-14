@@ -46,7 +46,7 @@ if(isset($_SESSION['user_id'])){
         </div>
         <div class="row">
             <div class="column_item center_content">
-                <form>
+                <form id="buyAndSell" method="POST" action="handlers/buyAndSellHandler.php">
                     <label for="usd_amt">Enter ammount in USD</label>
                     <input type="text" id="usd_amt" placeholder="USD">
                     <br>
