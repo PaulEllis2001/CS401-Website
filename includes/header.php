@@ -5,8 +5,10 @@
         <title>Fraud Coin</title>
         <link href="css/style.css" rel="stylesheet" type="text/css">
         <link href="images/icon.png" rel="icon">
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="js/jquery-3.6.4.min.js"></script>
         <script src="js/script.js"></script>
+        <script src="js/jquery.canvasjs.min.js"></script>
+        <script src="js/graph.js"></script>
     </head>
     <body>
         <nav class="navbar">

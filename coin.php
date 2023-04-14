@@ -37,7 +37,7 @@ if(isset($_SESSION['user_id'])){
             <h2>History</h2>
             <button>24 Hr</button>
             <button>1 Wk</button>
-            <img id="coin_graph" src="https://datavizproject.com/wp-content/uploads/types/Line-Graph.png">
+            <div id="chartContainer"></div>
         </div>
     </div>
     <div class="bordered">
