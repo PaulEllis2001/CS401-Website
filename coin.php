@@ -6,6 +6,10 @@ $dao = new Dao();
 $coinID = $dao->getCoinID($_GET['coin_name'])[0]['coin_id'];
 $coinInfo = $dao->getCoinInfo($coinID);
 
+$coinHistory = $dao->getCoinHistory($coinID);
+$fileName = "files/" . $_GET['coin_name'] . "_history.json";
+file_put_contents($fileName, json_encode($coinHistory));
+
 $userInfo = null;
 
 if(isset($_SESSION['user_id'])){

@@ -25,6 +25,16 @@ session_start();
             ORDER BY coin_id, change_time DESC")->fetchAll(PDO::FETCH_ASSOC);
         }
 
+
+        public function getCoinHistory($coin_id){
+            $conn = $this->getConnection();
+            $q = $conn->prepare("SELECT * FROM coin_history WHERE coin_id = :coin_id");
+            $q->bindParam(":coin_id", $coin_id);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+
         public function getCoinID($coinName){
            $conn = $this->getConnection();
            $q = $conn->prepare("SELECT coin_id FROM coin WHERE coin_name = :coinName");
