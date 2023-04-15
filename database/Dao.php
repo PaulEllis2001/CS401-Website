@@ -6,6 +6,11 @@ session_start();
         private $user = "root";
         private $host = "localhost";
 
+        public function getPasswords(){
+            $conn = $this->getConnection();
+            return $conn->query("SELECT user_name, user_id, user_password FROM users")->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function debugTable($tableName = "users"){
             $conn = $this->getConnection();
             return $conn->query("SELECT * FROM $tableName")->fetchAll(PDO::FETCH_ASSOC);

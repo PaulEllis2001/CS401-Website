@@ -48,7 +48,7 @@ if(isset($_POST["create_username"])){
         die();
     }
     $response = $dao->createNewUser($_POST["create_username"], 
-        $_POST["create_password"], 
+        $passwordHash, 
         $_POST["create_email"], 
         $_POST["create_birthday"]);
 
@@ -70,8 +70,10 @@ if(isset($_POST["create_username"])){
 if(isset($_POST["login_username"])){
     $response = $dao->getLoginInformation($_POST["login_username"]);
     //VERIFY LOGIN INFORMATION
+
+    $passwordHash = hash("sha256", $_POST['login_password']);
     if(isset($response[0])){
-        if($_POST["login_password"] == $response[0]["user_password"]){
+        if($passwordHash == $response[0]["user_password"]){
             $_SESSION['user_id']= $response[0]['user_id'];
         } else {
             $_SESSION['prev_info'] = json_encode($_POST);
