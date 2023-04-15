@@ -7,7 +7,18 @@ if(!isset($_COOKIES['PHPSESSID'])){
 $dao= new Dao();
 
 if(isset($_POST['search'])){
-    $_SESSION['search_results'] = json_encode("NOT YET IMPLEMENTED");
+   $results = $dao->searchUsers();
+   $response = array();
+   foreach($results as $row){
+      foreach($row as $column){
+        if(str_contains($column, $_POST['search'])){
+            array_push($response, $row);
+            break;
+        }
+      }
+   }
+   $_SESSION['result_type'] = "users";
+    $_SESSION['search_results'] = json_encode($response);
 } else {
     $_SESSION['search_results'] = json_encode($_POST);
 }

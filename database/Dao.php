@@ -18,8 +18,15 @@ session_start();
 
         public function searchCoins(){
             $conn = $this->getConnection();
-            return $conn->query("SELECT * FROM coin")->fetchAll(PDO::FETCH_ASSOC);
+            return $conn->query("SELECT coin_name, coin_value, coin_num_circulating FROM coin")->fetchAll(PDO::FETCH_ASSOC);
         }
+        
+        public function searchUsers(){
+            $conn = $this->getConnection();
+            return $conn->query("SELECT user_name, user_rank, user_cash FROM users")->fetchAll(PDO::FETCH_ASSOC);
+        }
+        
+        
         //Look At Again
         public function getCoinSummary(){
             $connection = $this->getConnection();
