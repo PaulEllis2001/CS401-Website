@@ -9,6 +9,7 @@
         <script src="js/script.js"></script>
         <script src="js/jquery.canvasjs.min.js"></script>
         <script src="js/graph.js"></script>
+        <script src="js/cookies.js"></script>
     </head>
     <body>
         <nav class="navbar">

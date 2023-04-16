@@ -6,9 +6,13 @@ session_start();
         private $user = "root";
         private $host = "localhost";
 
-        public function getPasswords(){
+
+        public function updateHistoryDate($id, $date){
             $conn = $this->getConnection();
-            return $conn->query("SELECT user_name, user_id, user_password FROM users")->fetchAll(PDO::FETCH_ASSOC);
+            $q = $conn->prepare("UPDATE coin_history SET change_time = :date WHERE ch_id = :id");
+            $q->bindParam(":id", $id);
+            $q->bindParam(":date", $date);
+            $q->execute();
         }
 
         public function debugTable($tableName = "users"){
@@ -44,11 +48,40 @@ session_start();
 
         public function getCoinHistory($coin_id){
             $conn = $this->getConnection();
-            $q = $conn->prepare("SELECT * FROM coin_history WHERE coin_id = :coin_id");
+            $q = $conn->prepare("SELECT * FROM coin_history WHERE coin_id = :coin_id ORDER BY change_time ASC");
             $q->bindParam(":coin_id", $coin_id);
             $q->execute();
             return $q->fetchAll(PDO::FETCH_ASSOC);
 
+        }
+
+
+        public function createNewCoin($coin_name, $coin_value){
+            $conn = $this->getConnection();
+            $q = $conn->prepare("INSERT INTO coin (coin_name, coin_value, coin_num_circulating) VALUES (:coin_name, :coin_value, 0)");
+            $q->bindParam(":coin_name", $coin_name);
+            $q->bindParam(":coin_value", $coin_value);
+            $q->execute();
+        }
+
+        public function updateCoin($coin_id, $percent_change){
+            $conn = $this->getConnection();
+            $coin_info = $this->getCoinInfo($coin_id);
+            $cur_value = $coin_info[0]['coin_value'];
+            $next_value = $cur_value * (1 + ($percent_change / 100));
+            if($next_value <= 0.1){
+                $next_value = .1;
+            }
+            $uQ = $conn->prepare("INSERT INTO coin_history (percent_change, coin_id, coin_new_value) VALUES (:percent_change, :coin_id, :coin_new_value)");
+            $uQ->bindParam(":coin_id", $coin_id);
+            $uQ->bindParam(":percent_change", $percent_change);
+            $uQ->bindParam(":coin_new_value", $next_value);
+            $uQ->execute();
+
+            $q = $conn->prepare("UPDATE coin SET coin_value = :new_value WHERE coin_id = :coin_id");
+            $q->bindParam(":new_value", $next_value);
+            $q->bindParam(":coin_id", $coin_id);
+            $q->execute();
         }
 
         public function getCoinID($coinName){

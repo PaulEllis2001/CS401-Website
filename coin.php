@@ -9,7 +9,7 @@ $coinInfo = $dao->getCoinInfo($coinID);
 $coinHistory = $dao->getCoinHistory($coinID);
 $fileName = "files/" . $_GET['coin_name'] . "_history.json";
 file_put_contents($fileName, json_encode($coinHistory));
-
+$_COOKIES['fileName'] = $fileName;
 $userInfo = null;
 
 if(isset($_SESSION['user_id'])){
