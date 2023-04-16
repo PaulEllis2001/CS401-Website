@@ -19,14 +19,14 @@ echo "<pre>" . print_r($result, 1) . "</pre>";
 for( $i = 1; $i < 11; $i++){
    for( $j = 0; $j < 100; $j++){
         $percent_change = rand(0, 10);
-        $dao->updateCoin($i, $percent_change);
+//        $dao->updateCoin($i, $percent_change);
    }
 }
 
 
 for( $i = 1; $i < 1002; $i++){
     $new_date = date("Y-m-d H:i:s", mt_rand(1650083453 ,1681619453));
-    $dao->updateHistoryDate($i, $new_date);
+//    $dao->updateHistoryDate($i, $new_date);
     echo $new_date . "</br>";
 }
 
