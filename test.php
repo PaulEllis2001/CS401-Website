@@ -19,7 +19,7 @@ echo "<pre>" . print_r($result, 1) . "</pre>";
 for( $i = 1; $i < 11; $i++){
    for( $j = 0; $j < 100; $j++){
         $percent_change = rand(0, 10);
-//        $dao->updateCoin($i, $percent_change);
+        $dao->updateCoin($i, $percent_change);
    }
 }
 
