@@ -14,7 +14,6 @@
     <body>
     <?php
         $currentPage = $_SERVER['REQUEST_URI'];
-        echo $currentPage;
         if($currentPage == "/"){
             $currentPage = "/index.php";
         }
