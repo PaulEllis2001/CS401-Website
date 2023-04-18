@@ -12,6 +12,13 @@
         <script src="js/cookies.js"></script>
     </head>
     <body>
+    <?php
+        $currentPage = $_SERVER['REQUEST_URI'];
+        echo $currentPage;
+        if($currentPage == "/"){
+            $currentPage = "/index.php";
+        }
+    ?>
         <nav class="navbar">
             <div class="container">
                 <div class="navbar">
@@ -21,22 +28,22 @@
                     <input type="submit" value="Search">
                 </form>
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                    <li class="<?php echo $currentPage == "/index.php" ? "current-page" : ""?> nav-item ">
                             <a class="nav-link" href="index.php">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="<?php echo $currentPage == "/leaderboard.php" ? "current-page" : ""?> nav-item">
                             <a class="nav-link" href="leaderboard.php">Leaderboard</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="<?php echo $currentPage == "/currentValues.php" ? "current-page" : ""?> nav-item ">
                             <a class="nav-link" href="currentValues.php">Current Values</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="<?php echo $currentPage == "/account.php" ? "current-page" : ""?> nav-item ">
                             <a class="nav-link" href="account.php">Account Overview</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="<?php echo $currentPage == "/login.php" ? "current-page" : ""?> nav-item ">
                             <a class="nav-link" href="login.php">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="<?php echo $currentPage == "/logout.php" ? "current-page" : ""?> nav-item ">
                             <a class="nav-link" href="handlers/logout_handler.php"> Log out</a>
                         </li>
                     </ul>

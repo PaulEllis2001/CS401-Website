@@ -7,6 +7,7 @@ html{
     font-family: "myFont", Arial, sans-serif;
 }
 
+
 .container{
     padding: auto;
     align-items: center;
@@ -64,6 +65,10 @@ p{
 }
 .nav-link:hover{
     color:lightblue;
+}
+
+.current-page{
+    background: #40613f;
 }
 
 .page-title{
