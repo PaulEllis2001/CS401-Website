@@ -47,6 +47,7 @@ $user_coin_info = $dao->getUserCoinSpecific($userInfo['user_id'], $coin_info[0][
             <input type="submit" value=<?php echo "\"$action\"";?>>
             <input type="hidden" value=<?php echo "\"{$userInfo['user_id']}\""?> name="user_id">
             <input type="hidden" value=<?php echo "\"{$coin_info[0]['coin_id']}\""?> name="coin_id">
+            <input type="hidden" value=<?php echo "\"$action\""; ?> name="action">
         </form>
     </div>
 </div>

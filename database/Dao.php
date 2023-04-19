@@ -240,43 +240,69 @@ session_start();
             return true;//Should probably return some sort of error as statement failed
         }
 
-        public function createPurchaseOrder($user_id, $coin_id, $coin_amt = 0.0, $dollar_amt = 0.0){
+        public function createPurchaseOrder($user_id, $coin_id, $num_coins, $value_coins){
             //TODO finish this
             $conn = $this->getConnection();
-            $insertHistory_string = "INSERT INTO transaction_history 
-            (user_id, coin_id, transaction_type, transaction_amount, transaction_value, transaction_change) 
-            VALUES (:user_id, :coin_id, 'buy', :transaction_amount, :transaction_value, transaction_change)";
+            $coin_circ_update = "UPDATE coin SET coin_num_circulating = :newCirculating WHERE coin_id = :coin_id";
 
-            $changeAmt = 0.0;
-            $userWalletID = 0;
+            $user_wallet_insert = "INSERT INTO user_coins (user_id, coin_id, purchase_value, purchase_amount) VALUES (:user_id, :coin_id, :purchase_value, :purchase_amount)";
+            $transaction_history_insert = "INSERT INTO transaction_history (user_id, coin_id, transaction_type, transaction_value, transaction_amount, transaction_change) VALUES (:user_id, :coin_id, 'buy', :transaction_value, :transaction_amount, :transaction_change)";
+            $user_cash_update = "UPDATE users SET user_cash = :new_cash WHERE user_id = :user_id";
+            $transaction_history_get_last = "SELECT * FROM transaction_history WHERE user_id = :user_id AND coin_id = :coin_id AND transaction_type = 'buy' ORDER BY transaction_time DESC LIMIT 1";
+            //Get User Cash, check if enough is there, throw error if not
+            $current_user_cash = $this->getUserInfo($user_id)[0]['user_cash'];
+            if($current_user_cash < $value_coins){
+                //RETURN FAILURE
+               return false;
+            }
+            $new_cash_ballance = $current_user_cash - $value_coins;
+            //Get Last transaction of the same coin and user and calculate the change percentage
+            $q = $conn->prepare($transaction_history_get_last);
+            $q->bindParam(":user_id", $user_id);
+            $q->bindParam(":coin_id", $coin_id);
+            $q->execute();
+            $last_transaction = $q->fetchAll(PDO::FETCH_ASSOC)[0];
 
-            $lastTransaction_string = "SELECT * FROM transaction_history 
-            WHERE user_id = :user_id AND coin_id = :coin_id 
-            ORDER BY transaction_time DESC LIMIT 1";
+            $percentChange = ($value_coins - $last_transaction['transaction_value']) / $last_transaction['transaction_value'];
 
-            $updateUserWallet_string = "UPDATE user_coins 
-            SET purchase_time = NOW(), purchase_value = :coin_value, 
-            purchase_amount = :coin_amt WHERE purchase_id = :wallet_id";
-
-            $userWallet_string = "SELECT * FROM user_coins WHERE user_id = :user_id AND coin_id = :coin_id";
-            $uWQ = $conn->prepare($userWallet_string);
+            //Update user_wallet
+            $uWQ = $conn->prepare($user_wallet_insert);
             $uWQ->bindParam(":user_id", $user_id);
             $uWQ->bindParam(":coin_id", $coin_id);
-            if($uWQ->execute()){
-                $userWalletID = $uWQ->fetchAll(PDO::FETCH_ASSOC)["purchase_id"];
-            }
+            $uWQ->bindParam(":purchase_value", $value_coins);
+            $uWQ->bindParam(":purchase_amount", $num_coins);
+            $uWQ->execute();
 
-            $lTQ = $conn->prepare($lastTransaction_string);
-            $lTQ->bindParam(":user_id", $user_id);
-            $lTQ->bindParam(":coin_id", $coin_id);
-            if($lTQ->execute()){
-                $lTQ_Array = $lTQ->fetchAll(PDO::FETCH_ASSOC);
-                if($coin_amt > 0){
-                    $changeAmt = ($coin_amt - $lTQ_Array["transaction_amount"]) / $lTQ["transaction_amount"];
-                } else {
-                    $changeAmt = ($dollar_amt - $lTQ_Array["transaction_value"]) / $lTQ_Array["transaction_value"];
-                }
-            }
+            //Update transaction_history
+            
+            $uTHQ = $conn->prepare($transaction_history_insert);
+            $uTHQ->bindParam(":user_id", $user_id);
+            $uTHQ->bindParam(":coin_id", $coin_id);
+            $uTHQ->bindParam(":transaction_value", $value_coins);
+            $uTHQ->bindParam(":transaction_amount", $num_coins);
+            $uTHQ->bindParam(":transaction_change", $percentChange);
+            $uTHQ->execute();
+
+            //Update user cash
+
+            $uUCQ = $conn->prepare($user_cash_update);
+            $uUCQ->bindParam(":user_id", $user_id);
+            $uUCQ->bindParam(":new_cash", $new_cash_ballance);
+            $uUCQ->execute();
+
+            //Get Current Num Circulating to update
+
+            $current_circ = $this->getCoinInfo($coin_id)[0]['coin_num_circulating'];
+            $new_circ = $current_circ + $num_coins;
+
+            //update coin num circulating
+
+            $uCNCQ = $conn->prepare($coin_circ_update);
+            $uCNCQ->bindParam(":newCirculating", $new_circ);
+            $uCNCQ->bindParam(":coin_id", $coin_id);
+
+            //return success
+            return true;
         }
 
         public function createSaleOrder(){
