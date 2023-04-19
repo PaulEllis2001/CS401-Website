@@ -1,8 +1,12 @@
 $(document).ready(function() {
     $(".buy").click(function() {
-        alert("BUY");
+       let path = 'purchase.php?action=';
+       path += this.id;
+       window.location.href=path;
     });
    $(".sell").click(function() {
-        alert("SELL");
+      let path = 'purchase.php?action=';
+      path += this.id;
+      window.location.href=path;
    });
 });
