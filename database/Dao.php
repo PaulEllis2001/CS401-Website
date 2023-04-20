@@ -110,7 +110,15 @@ session_start();
             $q->bindParam(":coin_id", $coin_id);
             $q->execute();
             return $q->fetchAll(PDO::FETCH_ASSOC);
-        
+        }
+
+        public function getUserCoin($user_id, $coin_id){
+            $conn = $this->getConnection();
+            $q = $conn->prepare("SELECT purchase_amount, purchase_value FROM user_coins WHERE user_id = :user_id AND coin_id = :coin_id ");
+            $q->bindParam(":user_id", $user_id);
+            $q->bindParam(":coin_id", $coin_id);
+            $q->execute();
+            return $q->fetchAll(PDO::FETCH_ASSOC);
         }
 
         //Done
@@ -305,8 +313,29 @@ session_start();
             return true;
         }
 
-        public function createSaleOrder(){
-            //TODO this
+        public function createSaleOrder($user_id, $coin_id, $num_coins, $value_coins){
+           $conn = $this->getConnection();
+           //Get user wallet coins
+           $user_wallet = $this->getUserCoin($user_id, $coin_id);
+           //Get user cash
+           $user_cash = $this->getUserCash($user_id, $coin_id);
+           //Get coin num in circulation
+           $current_circulation = $this->getCoinInfo($coin_id)[0]['coin_num_circulating'];
+           //Update User wallet
+           $new_row_info = null;
+           foreach($user_wallet as $row){
+              if($row['purchase_amount'] >= $num_coins){
+                 $new_row_info = array("purchase_amount" => ($row['purchase_amount'] - $num_coins), "purchase_value" => ($row['purchase_value'] - $value_coins));
+              } else {
+                 if($row['purchase_value'] > $value_coins){
+                    //Need to work on this
+                 }
+              }
+           }
+           $user_wallet_update_query = "";
+           //Update User Cash
+           //Update Coin num in circ
+           //New Transaction History Entry
         }
 
         public function testGetRank(){

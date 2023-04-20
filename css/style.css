@@ -66,6 +66,12 @@ p{
 .nav-link:hover{
     color:lightblue;
 }
+.title-icon{
+   vertical-align: middle;
+   padding-left: 10px;
+   max-width: 40px;
+   max-height: 40px;
+}
 
 .current-page{
     background: #40613f;
@@ -79,6 +85,7 @@ p{
 .title-nav{
     text-decoration: none;
     color: #fff;
+    vertical-align: middle;
 }
 
 .title-nav:hover{

@@ -52,9 +52,9 @@ if($num_coins != null){
 echo "$num_coins  $val_coins</br>";
 
 if($action == 'sell'){
-    $dao->sellCoin();
+    $dao->createSaleOrder($user_id, $coin_id, $num_coins, $val_coins);
 } else {
-    $dao->purchaseCoin();
+    $dao->createPurchaseOrder($user_id, $coin_id, $num_coins, $val_coins);
 }
 
 

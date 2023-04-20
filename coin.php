@@ -48,10 +48,10 @@ if(isset($_SESSION['user_id'])){
             <div class="column_item center_content">
                 <form id="buyAndSell" method="POST" action="handlers/buyAndSellHandler.php">
                     <label for="usd_amt">Enter ammount in USD</label>
-                    <input type="text" id="usd_amt" placeholder="USD">
+                    <input type="number" id="usd_amt" placeholder="USD">
                     <br>
                     <label for="coin_amt">OR<br>Enter Number of Coins</label>
-                    <input type="text" id="coin_amt" placeholder="Coins">
+                    <input type="number" id="coin_amt" placeholder="Coins">
                     <br>
                     <input type="button" name="buy" value="Buy">
                     <input type="button" name="sell" value="Sell">

@@ -38,8 +38,8 @@ if(isset($_GET['tab'])){
         <div class="nav_tab">
             <button onclick="window.location.href='?tab=user_gains';">User Gains</button>
             <button onclick="window.location.href='?tab=user_losses';">User Losses</button>
-            <button onclick="window.location.href='?tab=coin_gains';">Coin Gains</button>
-            <button onclick="window.location.href='?tab=coin_losses';">Coin Losses</button>
+            <button onclick="window.location.href='?tab=coin_gains';">Coin Value</button>
+            <button onclick="window.location.href='?tab=coin_losses';">Coin Value</button>
         </div>
         <div class="center_content">
         <?php

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Fraud Coin</title>
         <link href="css/style.css" rel="stylesheet" type="text/css">
-        <link href="images/icon.png" rel="icon">
+        <link href="images/whiteIcon.png" rel="icon">
         <script src="js/jquery-3.6.4.min.js"></script>
         <script src="js/script.js"></script>
         <script src="js/jquery.canvasjs.min.js"></script>
@@ -21,6 +21,7 @@
         <nav class="navbar">
             <div class="container">
                 <div class="navbar">
+                <img src="../images/whiteIcon.png" class="title-icon"/>
                 <h1 class="heading"><a class="title-nav" href="index.php">FraudCoin</a></h1>
                 <form class="search_form" id="search_form" method="POST" action="handlers/search_handler.php">
                     <input type="text" id="search" name="search" placeholder="Search">
