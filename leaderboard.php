@@ -5,6 +5,8 @@ require_once'Widgets.php';
 $dao = new Dao();
 $widget = new Widgets();
 
+$dao->updateRanks();
+
 $leaderboard = null;
 $columnNames = null;
 
@@ -36,8 +38,8 @@ if(isset($_GET['tab'])){
     <h1>Leaderboard</h1>
     <div class="column_box">
         <div class="nav_tab">
-            <button onclick="window.location.href='?tab=user_gains';">User Gains</button>
-            <button onclick="window.location.href='?tab=user_losses';">User Losses</button>
+            <button onclick="window.location.href='?tab=user_gains';">User Portfolio Value</button>
+            <button onclick="window.location.href='?tab=user_losses';">User Portfolio Value Descending</button>
             <button onclick="window.location.href='?tab=coin_gains';">Coin Value</button>
             <button onclick="window.location.href='?tab=coin_losses';">Coin Value</button>
         </div>

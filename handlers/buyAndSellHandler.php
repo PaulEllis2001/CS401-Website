@@ -57,5 +57,7 @@ if($action == 'sell'){
     $dao->createPurchaseOrder($user_id, $coin_id, $num_coins, $val_coins);
 }
 
+header("Location: ../account.php", true, 302);
+die();
 
 ?>

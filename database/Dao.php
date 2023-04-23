@@ -269,9 +269,15 @@ session_start();
             $q->bindParam(":user_id", $user_id);
             $q->bindParam(":coin_id", $coin_id);
             $q->execute();
-            $last_transaction = $q->fetchAll(PDO::FETCH_ASSOC)[0];
+            $last_transaction = $q->fetchAll(PDO::FETCH_ASSOC);
+            $percentChange = 100;
 
-            $percentChange = ($value_coins - $last_transaction['transaction_value']) / $last_transaction['transaction_value'];
+            if(isset($last_transaction[0])){
+               $last_transaction = $last_transaction[0];
+                $percentChange = ($value_coins - $last_transaction['transaction_value']) / $last_transaction['transaction_value'];
+            } else {
+                $last_transaction = null;
+            }
 
             //Update user_wallet
             $uWQ = $conn->prepare($user_wallet_insert);
@@ -318,7 +324,7 @@ session_start();
            //Get user wallet coins
            $user_wallet = $this->getUserCoin($user_id, $coin_id);
            //Get user cash
-           $user_cash = $this->getUserCash($user_id, $coin_id);
+           $user_cash = $this->getUserInfo($user_id)[0]['user_cash'];
            //Get coin num in circulation
            $current_circulation = $this->getCoinInfo($coin_id)[0]['coin_num_circulating'];
            //Update User wallet
@@ -345,6 +351,24 @@ session_start();
 
            $retVal = $conn->query("SELECT user_rank FROM users WHERE user_cash <= 100000 ORDER BY user_rank DESC")->fetchAll(PDO::FETCH_ASSOC);
            return $retVal;
+        }
+
+
+        public function updateRanks(){
+            $conn = $this->getConnection();
+            $q_string = "SELECT COALESCE(SUM(uc.purchase_value), 0)+ u.user_cash as total, uc.user_id, u.user_rank FROM user_coins uc RIGHT JOIN users u ON uc.user_id = u.user_id GROUP BY uc.user_id ORDER BY total DESC";
+
+            $users = $conn->query($q_string)->fetchAll(PDO::FETCH_ASSOC);
+            $i = 1;
+            foreach($users as $user){
+                $uU = $conn->prepare("UPDATE users SET user_rank = :rank WHERE user_id = :user_id");
+                $uU->bindParam(":rank", $i);
+                $uU->bindParam(":user_id", $user['user_id']);
+                $uU->execute();
+                $i+=1;
+            }
+            return $users;
+
         }
     }
 
